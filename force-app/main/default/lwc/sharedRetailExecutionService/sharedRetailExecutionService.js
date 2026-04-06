@@ -36,8 +36,14 @@ export async function loadRetailExecutionState(adapter, input) {
     throw new Error('An accountId is required before loading retail execution.');
   }
 
-  const [accountRecord, visitSchema, visitRecords] = await Promise.all([
-    adapter.loadRecord(ACCOUNT_OBJECT_API_NAME, accountId),
+  const [accountRecords, visitSchema, visitRecords] = await Promise.all([
+    adapter.queryRecords(ACCOUNT_OBJECT_API_NAME, {
+      fields: ['Id', 'Name'],
+      filters: {
+        Id: accountId
+      },
+      limit: 1
+    }),
     adapter.getObjectSchema(STORE_VISIT_OBJECT_API_NAME),
     adapter.queryRecords(STORE_VISIT_OBJECT_API_NAME, {
       fields: STORE_VISIT_FIELD_NAMES,
@@ -51,7 +57,7 @@ export async function loadRetailExecutionState(adapter, input) {
 
   return createRetailExecutionStateModel({
     accountId,
-    accountName: accountRecord?.fields?.Name ?? '',
+    accountName: accountRecords[0]?.fields?.Name ?? '',
     lastVisitRecord: visitRecords[0] ?? null,
     visitFields: visitSchema.fields
   });

@@ -37,20 +37,68 @@ export class PulsarDataAdapter extends DataAdapter {
     return rows?.[0] ? normalizeRecord(objectApiName, withCompoundFieldValues(rows[0])) : null;
   }
 
-  async queryRecords() {
-    throw new Error('PulsarDataAdapter.queryRecords() is not implemented yet.');
+  /**
+   * @param {string} objectApiName
+   * @param {import('c/sharedModels').QuerySpec} querySpec
+   * @returns {Promise<import('c/sharedModels').RecordModel[]>}
+   */
+  async queryRecords(objectApiName, querySpec = {}) {
+    const sdk = await this.ensureReady();
+
+    if (!sdk?.select) {
+      throw new Error('Pulsar SDK select() is not available.');
+    }
+
+    const query = buildSelectQuery(objectApiName, querySpec);
+    const rows = await sdk.select(objectApiName, query);
+    return Array.isArray(rows)
+      ? rows.map((row) => normalizeRecord(objectApiName, withCompoundFieldValues(row)))
+      : [];
   }
 
-  async createRecord() {
-    throw new Error('PulsarDataAdapter.createRecord() is not implemented yet.');
+  /**
+   * @param {string} objectApiName
+   * @param {Record<string, unknown>} fields
+   * @returns {Promise<string>}
+   */
+  async createRecord(objectApiName, fields) {
+    const sdk = await this.ensureReady();
+
+    if (!sdk?.create) {
+      throw new Error('Pulsar SDK create() is not available.');
+    }
+
+    return sdk.create(objectApiName, withoutUndefinedFields(fields));
   }
 
-  async updateRecord() {
-    throw new Error('PulsarDataAdapter.updateRecord() is not implemented yet.');
+  /**
+   * @param {string} objectApiName
+   * @param {Record<string, unknown>} fields
+   * @returns {Promise<string>}
+   */
+  async updateRecord(objectApiName, fields) {
+    const sdk = await this.ensureReady();
+
+    if (!sdk?.update) {
+      throw new Error('Pulsar SDK update() is not available.');
+    }
+
+    return sdk.update(objectApiName, withoutUndefinedFields(fields));
   }
 
-  async deleteRecord() {
-    throw new Error('PulsarDataAdapter.deleteRecord() is not implemented yet.');
+  /**
+   * @param {string} objectApiName
+   * @param {string} id
+   * @returns {Promise<string>}
+   */
+  async deleteRecord(objectApiName, id) {
+    const sdk = await this.ensureReady();
+
+    if (!sdk?.delete) {
+      throw new Error('Pulsar SDK delete() is not available.');
+    }
+
+    return sdk.delete(objectApiName, id);
   }
 
   /**
@@ -325,6 +373,95 @@ function asNullableNumber(value) {
  */
 function asBoolean(value) {
   return value === true || value === 'true' || value === 'TRUE';
+}
+
+/**
+ * @param {string} objectApiName
+ * @param {import('c/sharedModels').QuerySpec} querySpec
+ * @returns {string}
+ */
+function buildSelectQuery(objectApiName, querySpec) {
+  const selectedFields = Array.isArray(querySpec.fields) && querySpec.fields.length > 0
+    ? querySpec.fields.join(', ')
+    : '*';
+  const clauses = [];
+  const filterClause = buildFilterClause(querySpec.filters);
+
+  if (filterClause) {
+    clauses.push(filterClause);
+  }
+
+  if (querySpec.where) {
+    clauses.push(`(${querySpec.where})`);
+  }
+
+  const queryParts = [
+    `SELECT ${selectedFields}`,
+    `FROM ${objectApiName}`
+  ];
+
+  if (clauses.length > 0) {
+    queryParts.push(`WHERE ${clauses.join(' AND ')}`);
+  }
+
+  if (querySpec.orderBy) {
+    queryParts.push(`ORDER BY ${querySpec.orderBy}`);
+  }
+
+  if (querySpec.limit != null) {
+    queryParts.push(`LIMIT ${Number(querySpec.limit)}`);
+  }
+
+  return queryParts.join(' ');
+}
+
+/**
+ * @param {Record<string, string | number | boolean | null> | undefined} filters
+ * @returns {string}
+ */
+function buildFilterClause(filters) {
+  if (!filters) {
+    return '';
+  }
+
+  const entries = Object.entries(filters);
+  if (entries.length === 0) {
+    return '';
+  }
+
+  return entries
+    .map(([fieldName, value]) => (
+      value === null
+        ? `${fieldName} IS NULL`
+        : `${fieldName} = ${toSqlLiteral(value)}`
+    ))
+    .join(' AND ');
+}
+
+/**
+ * @param {string | number | boolean} value
+ * @returns {string}
+ */
+function toSqlLiteral(value) {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? String(value) : 'NULL';
+  }
+
+  if (typeof value === 'boolean') {
+    return value ? "'true'" : "'false'";
+  }
+
+  return `'${String(value).replaceAll("'", "''")}'`;
+}
+
+/**
+ * @param {Record<string, unknown>} fields
+ * @returns {Record<string, unknown>}
+ */
+function withoutUndefinedFields(fields) {
+  return Object.fromEntries(
+    Object.entries(fields).filter(([, value]) => value !== undefined)
+  );
 }
 
 /**
