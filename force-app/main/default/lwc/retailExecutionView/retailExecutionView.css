@@ -1,11 +1,87 @@
 .retail-execution {
   display: block;
+  padding: 0.75rem 1rem 1rem;
 }
 
-.state {
+.panel-state {
   padding: 1rem;
 }
 
-.error {
+.panel-state_error {
   color: #8b1e1e;
+}
+
+.summary-line {
+  margin: 0 0 0.85rem;
+  color: #181818;
+  line-height: 1.5;
+}
+
+.summary-label,
+.detail-label {
+  font-weight: 700;
+}
+
+.entry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.field {
+  display: block;
+}
+
+.field_short {
+  max-width: 10rem;
+}
+
+.field-checkbox {
+  margin-top: 0.5rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.85rem;
+}
+
+.actions_single {
+  margin-top: 0.65rem;
+}
+
+.visit-link {
+  margin-left: 0.35rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #0176d3;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+}
+
+.visit-link:hover,
+.visit-link:focus {
+  color: #014486;
+}
+
+.visit-panel {
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #d8dde6;
+  border-radius: 0.25rem;
+  background: #f8fafc;
+}
+
+.detail-row {
+  margin: 0 0 0.45rem;
+  line-height: 1.45;
+}
+
+.detail-row:last-of-type {
+  margin-bottom: 0;
 }
