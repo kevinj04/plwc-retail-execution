@@ -1,5 +1,5 @@
 import { createElement } from 'lwc';
-import PulsarRecordDetail from '../../force-app/main/default/lwc/pulsarRecordDetail/pulsarRecordDetail.js';
+import PulsarRetailExecution from '../../force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js';
 import { Pulsar } from './vendor/pulsar.js';
 import { installHostSizing, notifyHostSize } from './hostSizing.js';
 import { parseLaunchContext } from './queryContext.js';
@@ -9,7 +9,7 @@ const cleanupHostSizing = installHostSizing(appRoot);
 let pulsar = null;
 let appElement = null;
 
-function refreshRecordDetail() {
+function refreshRetailExecution() {
   if (typeof appElement?.refresh === 'function') {
     void appElement.refresh();
   }
@@ -24,25 +24,30 @@ function refreshRecordDetail() {
     await pulsar.init();
 
     const launchContext = parseLaunchContext(window.location.search);
-    if (!launchContext.objectApiName || !launchContext.recordId) {
+    if (!launchContext.recordId) {
       renderMissingContext();
       notifyHostSize('*');
       return;
     }
 
-    appElement = createElement('c-pulsar-record-detail', {
-      is: PulsarRecordDetail
+    if (launchContext.objectApiName && launchContext.objectApiName !== 'Account') {
+      renderUnsupportedContext(launchContext.objectApiName);
+      notifyHostSize('*');
+      return;
+    }
+
+    appElement = createElement('c-pulsar-retail-execution', {
+      is: PulsarRetailExecution
     });
     appElement.pulsarSdk = pulsar;
-    appElement.objectApiName = launchContext.objectApiName;
-    appElement.recordId = launchContext.recordId;
+    appElement.accountId = launchContext.recordId;
 
     appRoot.replaceChildren(appElement);
     notifyHostSize('*');
 
     if (typeof pulsar.registerHandler === 'function') {
-      pulsar.registerHandler('invalidateLayout', refreshRecordDetail);
-      pulsar.registerHandler('syncDataFinished', refreshRecordDetail);
+      pulsar.registerHandler('invalidateLayout', refreshRetailExecution);
+      pulsar.registerHandler('syncDataFinished', refreshRetailExecution);
     }
   } catch (error) {
     renderError(error instanceof Error ? error.message : 'Unexpected Pulsar bootstrap error.');
@@ -56,7 +61,7 @@ function renderBootstrapLoading() {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Initializing Pulsar bridge.</p>
         </div>
         <div class="state">Loading...</div>
@@ -71,7 +76,7 @@ function renderError(message) {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Bootstrap failed before the app could render.</p>
         </div>
         <div class="state error">${escapeHtml(message)}</div>
@@ -86,10 +91,25 @@ function renderMissingContext() {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Launch context is incomplete.</p>
         </div>
-        <div class="state error">This app requires both objectType and id query parameters.</div>
+        <div class="state error">This app requires an account id in the launch context.</div>
+      </section>
+    </main>
+  `;
+}
+
+function renderUnsupportedContext(objectApiName) {
+  appRoot.innerHTML = `
+    <main class="shell">
+      <section class="panel">
+        <div class="panel-header">
+          <p class="eyebrow">Pulsar App</p>
+          <h1 class="title">Retail Execution</h1>
+          <p class="subtitle">Launch context is unsupported.</p>
+        </div>
+        <div class="state error">Retail Execution expects an Account context but received ${escapeHtml(objectApiName)}.</div>
       </section>
     </main>
   `;
