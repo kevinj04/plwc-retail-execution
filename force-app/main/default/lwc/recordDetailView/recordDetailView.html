@@ -1,0 +1,40 @@
+<template>
+  <section class="record-detail">
+    <template lwc:if={isLoading}>
+      <div class="state">Loading...</div>
+    </template>
+
+    <template lwc:elseif={hasError}>
+      <div class="state error">{errorMessage}</div>
+    </template>
+
+    <template lwc:elseif={hasSections}>
+      <template for:each={sections} for:item="section">
+        <article class="detail-section" key={section.heading}>
+          <h2>{section.heading}</h2>
+
+          <template for:each={section.rows} for:item="row">
+            <div class="detail-row" key={row.key}>
+              <template for:each={row.fields} for:item="field">
+                <div class="detail-field" key={field.apiName}>
+                  <div class="field-label">
+                    {field.label}
+                    <template lwc:if={field.required}>
+                      <span class="required">*</span>
+                    </template>
+                  </div>
+                  <div class="field-value">
+                    <template lwc:if={field.isEmpty}>
+                      <span class="empty">--</span>
+                    </template>
+                    <template lwc:else>{field.value}</template>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </template>
+        </article>
+      </template>
+    </template>
+  </section>
+</template>

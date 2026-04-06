@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "allowJs": true,
+    "checkJs": true,
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "c/*": [
+        "force-app/main/default/lwc/*"
+      ]
+    }
+  },
+  "include": [
+    "force-app/main/default/lwc/**/*.js"
+  ]
+}

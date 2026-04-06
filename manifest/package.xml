@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <name>ApexClass</name>
+  </types>
+  <types>
+    <members>dataAdapter</members>
+    <members>pulsarDataAdapter</members>
+    <members>pulsarRecordDetail</members>
+    <members>recordDetailApp</members>
+    <members>recordDetailView</members>
+    <members>salesforceRecordDetail</members>
+    <members>sharedModels</members>
+    <members>sharedRecordService</members>
+    <name>LightningComponentBundle</name>
+  </types>
+  <version>62.0</version>
+</Package>

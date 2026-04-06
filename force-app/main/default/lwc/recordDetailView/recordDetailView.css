@@ -1,0 +1,57 @@
+.record-detail {
+  display: block;
+  padding: 1rem;
+  color: #181818;
+}
+
+.detail-section + .detail-section {
+  margin-top: 1rem;
+}
+
+.detail-section h2 {
+  margin: 0 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.detail-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-field {
+  border-bottom: 1px solid #dddbda;
+  padding-bottom: 0.5rem;
+}
+
+.field-label {
+  color: #444;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.field-value {
+  margin-top: 0.25rem;
+  min-height: 1.5rem;
+}
+
+.required {
+  color: #b60505;
+  margin-left: 0.15rem;
+}
+
+.empty {
+  color: #706e6b;
+}
+
+.state {
+  color: #444;
+}
+
+.error {
+  color: #b60505;
+}

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pulsar Record Detail</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f5f7fa;
+        color: #18212b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+          radial-gradient(circle at top, rgba(28, 107, 160, 0.12), transparent 30%),
+          linear-gradient(180deg, #f9fbfc 0%, #eef3f8 100%);
+      }
+
+      #app {
+        min-height: 100vh;
+      }
+
+      .shell {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+      }
+
+      .panel {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid rgba(24, 33, 43, 0.08);
+        border-radius: 16px;
+        box-shadow: 0 18px 40px rgba(24, 33, 43, 0.08);
+        overflow: hidden;
+      }
+
+      .panel-header {
+        padding: 20px 24px 12px;
+        border-bottom: 1px solid rgba(24, 33, 43, 0.08);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        color: #516170;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 28px;
+        line-height: 1.1;
+      }
+
+      .subtitle {
+        margin: 10px 0 0;
+        color: #516170;
+        font-size: 14px;
+      }
+
+      .panel-body {
+        padding: 24px;
+      }
+
+      .state {
+        padding: 24px;
+        color: #304150;
+        font-size: 15px;
+      }
+
+      .state.error {
+        color: #a12626;
+      }
+
+      .context-grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      }
+
+      .context-item {
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #f6f9fc;
+        border: 1px solid rgba(24, 33, 43, 0.07);
+      }
+
+      .context-label {
+        display: block;
+        margin-bottom: 6px;
+        color: #516170;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .context-value {
+        margin: 0;
+        color: #18212b;
+        font-size: 14px;
+        word-break: break-word;
+      }
+
+      .note {
+        margin-top: 20px;
+        padding: 14px 16px;
+        border-left: 4px solid #1c6ba0;
+        background: rgba(28, 107, 160, 0.08);
+        color: #22313f;
+        font-size: 14px;
+      }
+
+      .detail-stack {
+        margin-top: 24px;
+      }
+
+      .detail-section + .detail-section {
+        margin-top: 24px;
+      }
+
+      .detail-section h2 {
+        margin: 0 0 12px;
+        font-size: 16px;
+      }
+
+      .detail-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .detail-field {
+        padding: 14px 16px;
+        border-radius: 12px;
+        background: #fbfdff;
+        border: 1px solid rgba(24, 33, 43, 0.07);
+      }
+
+      .field-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 8px;
+        color: #516170;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .field-value {
+        color: #18212b;
+        font-size: 14px;
+        line-height: 1.5;
+        word-break: break-word;
+      }
+
+      .field-value.is-empty {
+        color: #7b8794;
+      }
+
+      .required {
+        color: #a12626;
+      }
+
+      .help-text {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border-radius: 999px;
+        background: rgba(28, 107, 160, 0.12);
+        color: #1c6ba0;
+        font-size: 11px;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
