@@ -117,6 +117,29 @@
  * @property {string=} where
  * @property {string=} orderBy
  * @property {number=} limit
+ * @property {Record<string, string | number | boolean | null>=} filters
+ */
+
+/**
+ * @typedef {object} RetailExecutionVisitModel
+ * @property {string | null} id
+ * @property {string} accountId
+ * @property {string | null} name
+ * @property {string | null} checkInAt
+ * @property {string | null} checkOutAt
+ * @property {string | null} shelfCondition
+ * @property {number | null} promotionalDisplayCount
+ * @property {boolean} spokeToManager
+ */
+
+/**
+ * @typedef {object} RetailExecutionStateModel
+ * @property {string} accountId
+ * @property {string} accountName
+ * @property {RetailExecutionVisitModel | null} lastVisit
+ * @property {RetailExecutionVisitModel | null} draftVisit
+ * @property {FieldModel | null} shelfConditionField
+ * @property {boolean} isCheckedIn
  */
 
 /**
@@ -204,4 +227,58 @@ export function normalizeScalar(value) {
  */
 export function indexFieldsByApiName(fields) {
   return new Map(fields.map((field) => [field.apiName, field]));
+}
+
+/**
+ * @param {RecordModel | null | undefined} record
+ * @returns {RetailExecutionVisitModel | null}
+ */
+export function normalizeRetailExecutionVisit(record) {
+  if (!record) {
+    return null;
+  }
+
+  return {
+    id: record.id || null,
+    accountId: record.fields.Account__c ?? '',
+    name: record.fields.Name ?? null,
+    checkInAt: record.fields.Check_In__c ?? null,
+    checkOutAt: record.fields.Check_Out__c ?? null,
+    shelfCondition: record.fields.Shelf_Condition__c ?? null,
+    promotionalDisplayCount: normalizeNullableNumber(record.fields.Promotional_Display_Count__c),
+    spokeToManager: normalizeBoolean(record.fields.Spoke_To_Manager__c)
+  };
+}
+
+/**
+ * @param {string | null | undefined} value
+ * @returns {number | null}
+ */
+export function normalizeNullableNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : null;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+export function normalizeBoolean(value) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    return value.toLowerCase() === 'true';
+  }
+
+  if (typeof value === 'number') {
+    return value !== 0;
+  }
+
+  return false;
 }
