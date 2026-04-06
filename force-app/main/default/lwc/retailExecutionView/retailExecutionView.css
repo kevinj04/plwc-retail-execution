@@ -1,0 +1,11 @@
+.retail-execution {
+  display: block;
+}
+
+.state {
+  padding: 1rem;
+}
+
+.error {
+  color: #8b1e1e;
+}

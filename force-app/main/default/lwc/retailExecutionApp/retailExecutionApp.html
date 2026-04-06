@@ -1,0 +1,18 @@
+<template>
+  <c-retail-execution-view
+    account-name={accountName}
+    last-visit={lastVisit}
+    draft-visit={draftVisit}
+    viewing-visit={viewingVisit}
+    shelf-condition-field={shelfConditionField}
+    is-loading={isLoading}
+    is-saving={isSaving}
+    error-message={errorMessage}
+    onstartvisit={handleStartVisit}
+    ondraftchange={handleDraftChange}
+    oncanceldraft={handleCancelDraft}
+    onsavedraft={handleSaveDraft}
+    onshowlastvisit={handleShowLastVisit}
+    oncloselastvisit={handleCloseLastVisit}
+  ></c-retail-execution-view>
+</template>
