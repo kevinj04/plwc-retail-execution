@@ -25,23 +25,25 @@ The canonical background is in [docs/pulsar-lwc-rfc.md](/home/kevin/projects/ret
 
 ## Current Reference Flow
 
-Use the record-detail path as the reference implementation.
+Use the Retail Execution path as the reference implementation.
 
 Shared path:
 
 - [force-app/main/default/lwc/sharedModels/sharedModels.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedModels/sharedModels.js)
 - [force-app/main/default/lwc/dataAdapter/dataAdapter.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/dataAdapter/dataAdapter.js)
-- [force-app/main/default/lwc/sharedRecordService/sharedRecordService.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedRecordService/sharedRecordService.js)
-- [force-app/main/default/lwc/recordDetailApp/recordDetailApp.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/recordDetailApp/recordDetailApp.js)
-- [force-app/main/default/lwc/recordDetailView/recordDetailView.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/recordDetailView/recordDetailView.js)
+- [force-app/main/default/lwc/sharedRetailExecutionService/sharedRetailExecutionService.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedRetailExecutionService/sharedRetailExecutionService.js)
+- [force-app/main/default/lwc/retailExecutionApp/retailExecutionApp.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/retailExecutionApp/retailExecutionApp.js)
+- [force-app/main/default/lwc/retailExecutionView/retailExecutionView.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/retailExecutionView/retailExecutionView.js)
 
 Salesforce host:
 
-- [force-app/main/default/lwc/salesforceRecordDetail/salesforceRecordDetail.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/salesforceRecordDetail/salesforceRecordDetail.js)
+- [force-app/main/default/lwc/salesforceDataAdapter/salesforceDataAdapter.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/salesforceDataAdapter/salesforceDataAdapter.js)
+- [force-app/main/default/classes/SharedDataAdapterController.cls](/home/kevin/projects/retail-exec-2/force-app/main/default/classes/SharedDataAdapterController.cls)
+- [force-app/main/default/lwc/retailExecutionPage/retailExecutionPage.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/retailExecutionPage/retailExecutionPage.js)
 
 Pulsar host:
 
-- [force-app/main/default/lwc/pulsarRecordDetail/pulsarRecordDetail.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/pulsarRecordDetail/pulsarRecordDetail.js)
+- [force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js)
 - [force-app/main/default/lwc/pulsarDataAdapter/pulsarDataAdapter.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/pulsarDataAdapter/pulsarDataAdapter.js)
 - [pulsar-app/src/main.js](/home/kevin/projects/retail-exec-2/pulsar-app/src/main.js)
 
@@ -57,6 +59,7 @@ Pulsar host:
 - Simplify the demo further when it makes the starter easier to understand.
 - Keep documentation ahead of code drift.
 - Add equivalent starter patterns for editing and list experiences.
+- Verify the Pulsar runtime behavior for Lightning base components used by the shared Retail Execution UI.
 - Prefer comments that explain boundaries and intent over comments that restate code.
 
 ## Working Style For Future Agents

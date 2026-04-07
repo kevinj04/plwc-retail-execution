@@ -57,13 +57,13 @@ export default class RetailExecutionApp extends LightningElement {
 
     if (!this._adapter) {
       this.resetState();
-      this.errorMessage = 'A data adapter is required before loading retail execution.';
+      this.errorMessage = '';
       return;
     }
 
     if (!this._accountId) {
       this.resetState();
-      this.errorMessage = 'Set account-id before loading retail execution.';
+      this.errorMessage = '';
       return;
     }
 
@@ -91,7 +91,7 @@ export default class RetailExecutionApp extends LightningElement {
       }
 
       this.resetState();
-      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution error.';
+      this.errorMessage = normalizeErrorMessage(error, 'Unexpected retail execution error.');
     } finally {
       if (!this.shouldApply(refreshVersion)) {
         return;
@@ -110,7 +110,12 @@ export default class RetailExecutionApp extends LightningElement {
   }
 
   handleStartVisit() {
-    if (!this._accountId || this.isLoading || this.isSaving) {
+    if (!this._accountId) {
+      this.errorMessage = 'Retail Execution requires an Account record context.';
+      return;
+    }
+
+    if (this.isLoading || this.isSaving) {
       return;
     }
 
@@ -160,7 +165,7 @@ export default class RetailExecutionApp extends LightningElement {
         }
       }));
     } catch (error) {
-      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution save error.';
+      this.errorMessage = normalizeErrorMessage(error, 'Unexpected retail execution save error.');
     } finally {
       this.isSaving = false;
     }
@@ -199,4 +204,27 @@ export default class RetailExecutionApp extends LightningElement {
     this.isLoading = false;
     this.isSaving = false;
   }
+}
+
+function normalizeErrorMessage(error, fallbackMessage) {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  if (Array.isArray(error?.body)) {
+    return error.body
+      .map((entry) => entry?.message)
+      .filter(Boolean)
+      .join(', ') || fallbackMessage;
+  }
+
+  if (typeof error?.body?.message === 'string' && error.body.message) {
+    return error.body.message;
+  }
+
+  if (typeof error?.message === 'string' && error.message) {
+    return error.message;
+  }
+
+  return fallbackMessage;
 }

@@ -86,23 +86,23 @@ export default class RetailExecutionView extends LightningElement {
   }
 
   handleStartVisit() {
-    this.dispatchEvent(new CustomEvent('startvisit'));
+    this.dispatchEvent(createComponentEvent('startvisit'));
   }
 
   handleCancelDraft() {
-    this.dispatchEvent(new CustomEvent('canceldraft'));
+    this.dispatchEvent(createComponentEvent('canceldraft'));
   }
 
   handleSaveDraft() {
-    this.dispatchEvent(new CustomEvent('savedraft'));
+    this.dispatchEvent(createComponentEvent('savedraft'));
   }
 
   handleShowLastVisit() {
-    this.dispatchEvent(new CustomEvent('showlastvisit'));
+    this.dispatchEvent(createComponentEvent('showlastvisit'));
   }
 
   handleCloseLastVisit() {
-    this.dispatchEvent(new CustomEvent('closelastvisit'));
+    this.dispatchEvent(createComponentEvent('closelastvisit'));
   }
 
   handleFieldChange(event) {
@@ -117,13 +117,21 @@ export default class RetailExecutionView extends LightningElement {
       value = event.target.value;
     }
 
-    this.dispatchEvent(new CustomEvent('draftchange', {
+    this.dispatchEvent(createComponentEvent('draftchange', {
       detail: {
         fieldName,
         value
       }
     }));
   }
+}
+
+function createComponentEvent(name, init = {}) {
+  return new CustomEvent(name, {
+    bubbles: true,
+    composed: true,
+    ...init
+  });
 }
 
 function formatDate(value, options) {

@@ -2,7 +2,7 @@
 
 This repository is a starting point for building a Pulsar LWC: a Lightning Web Component implementation that can run in both Salesforce and Pulsar with the same UI and shared service logic.
 
-The current example is a shared record-detail flow. It exists to show the pattern we want future components to follow:
+The current example is a shared Retail Execution flow for Account records. It exists to show the pattern we want future components to follow:
 
 - shared UI in LWC
 - shared view-model and service logic
@@ -28,30 +28,32 @@ In practice, that means the shared UI should not talk directly to `lightning/ui*
 ```text
 Salesforce runtime                    Pulsar runtime
 -------------------                  ----------------
-salesforceRecordDetail               pulsar-app/src/main.js
+retailExecutionPage                 pulsar-app/src/main.js
         |                                     |
         v                                     v
-                 recordDetailView / recordDetailApp
+             retailExecutionView / retailExecutionApp
                               |
                               v
-                    sharedRecordService
+                  sharedRetailExecutionService
                               |
                               v
                          DataAdapter
                       /                \
                      v                  v
-          Salesforce UI API       Pulsar SDK adapter
+         Salesforce adapter      Pulsar SDK adapter
 ```
 
 ## Repo Layout
 
-- `force-app/main/default/lwc/recordDetailView`: shared presentational UI
-- `force-app/main/default/lwc/recordDetailApp`: shared app controller that calls the shared service
-- `force-app/main/default/lwc/sharedRecordService`: shared orchestration and view-model mapping
+- `force-app/main/default/lwc/retailExecutionView`: shared Retail Execution UI
+- `force-app/main/default/lwc/retailExecutionApp`: shared Retail Execution app controller
+- `force-app/main/default/lwc/sharedRetailExecutionService`: shared Retail Execution orchestration
 - `force-app/main/default/lwc/sharedModels`: shared typedefs and normalization helpers
 - `force-app/main/default/lwc/dataAdapter`: runtime-neutral adapter contract
-- `force-app/main/default/lwc/salesforceRecordDetail`: Salesforce host component
-- `force-app/main/default/lwc/pulsarRecordDetail`: Pulsar LWC host wrapper
+- `force-app/main/default/lwc/salesforceDataAdapter`: Salesforce adapter backed by Apex
+- `force-app/main/default/classes/SharedDataAdapterController.cls`: generic Salesforce data/schema bridge for the adapter
+- `force-app/main/default/lwc/retailExecutionPage`: Salesforce host component exposed in App Builder
+- `force-app/main/default/lwc/pulsarRetailExecution`: Pulsar LWC host wrapper
 - `force-app/main/default/lwc/pulsarDataAdapter`: Pulsar SDK-backed adapter
 - `pulsar-app/`: standalone Pulsar app entrypoint and bundling assets
 - `docs/pulsar-lwc-rfc.md`: architectural definition
@@ -72,7 +74,7 @@ If you feel pressure to import Salesforce UI APIs or the Pulsar SDK into shared 
 
 ## How To Start A New Component
 
-Use the record-detail example as the template.
+Use the Retail Execution example as the template.
 
 1. Copy the shared shape, not the exact feature.
 2. Create or extend shared models in `sharedModels`.
@@ -108,7 +110,7 @@ Deploy to an org:
 npm run deploy:org -- my-org
 ```
 
-After deployment, add `Pulsar Record Detail` to a Lightning record, app, or home page. On record pages Salesforce supplies `recordId` and `objectApiName`. On app/home pages you set them manually.
+After deployment, add `Retail Execution` to an Account Lightning record page. On app/home pages you can pass an `accountId` manually.
 
 ## Working In Pulsar
 
@@ -146,6 +148,8 @@ The standalone Pulsar entrypoint is [pulsar-app/src/main.js](/home/kevin/project
 
 `npm run check` is intentionally lightweight. It validates JavaScript syntax across the shared LWC modules, the Pulsar app entrypoint, and helper scripts. It is not a substitute for Salesforce deployment validation.
 
+`npm run build:pulsar` currently completes, but the Rollup output still warns that `lightning/card`, `lightning/button`, `lightning/input`, and `lightning/combobox` are unresolved external dependencies in the standalone Pulsar bundle. Treat that as an open runtime-validation item until the Pulsar app is exercised in its real environment.
+
 ## What To Clone This Repo For
 
 This repo is intended to be cloned when you want to start a new Pulsar-compatible LWC with the runtime boundary already established.
@@ -154,7 +158,7 @@ Before doing a rename pass in a cloned project, use [docs/scaffold-customization
 
 You should expect to replace:
 
-- the sample record-detail feature
+- the sample Retail Execution feature
 - the specific styling
 - any temporary scaffolding that is only useful for this example
 
@@ -174,8 +178,8 @@ Start in this order:
 2. [docs/pulsar-lwc-rfc.md](/home/kevin/projects/retail-exec-2/docs/pulsar-lwc-rfc.md)
 3. [docs/design.md](/home/kevin/projects/retail-exec-2/docs/design.md)
 4. [force-app/main/default/lwc/sharedModels/sharedModels.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedModels/sharedModels.js)
-5. [force-app/main/default/lwc/sharedRecordService/sharedRecordService.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedRecordService/sharedRecordService.js)
+5. [force-app/main/default/lwc/sharedRetailExecutionService/sharedRetailExecutionService.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/sharedRetailExecutionService/sharedRetailExecutionService.js)
 
 ## Status
 
-This is still a starter scaffold, not a finished framework. The record-detail path is the reference implementation. Future work should simplify further where possible and add equivalent shared patterns for edit and list experiences.
+This is still a starter scaffold, not a finished framework. The Retail Execution path is the current reference implementation. Future work should simplify further where possible, verify the standalone Pulsar runtime for Lightning base components, and add equivalent shared patterns for edit and list experiences.

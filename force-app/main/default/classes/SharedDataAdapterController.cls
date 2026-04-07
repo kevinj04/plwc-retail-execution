@@ -209,8 +209,101 @@ public with sharing class SharedDataAdapterController {
                 continue;
             }
 
-            record.put(fieldName, fieldValues.get(fieldName));
+            record.put(fieldName, coerceFieldValue(fieldDescribe, fieldValues.get(fieldName)));
         }
+    }
+
+    private static Object coerceFieldValue(Schema.DescribeFieldResult fieldDescribe, Object value) {
+        if (value == null) {
+            return null;
+        }
+
+        Schema.DisplayType fieldType = fieldDescribe.getType();
+
+        if (
+            fieldType == Schema.DisplayType.DateTime
+        ) {
+            return coerceDateTime(value);
+        }
+
+        if (fieldType == Schema.DisplayType.Date) {
+            return coerceDate(value);
+        }
+
+        if (fieldType == Schema.DisplayType.Boolean) {
+            return coerceBoolean(value);
+        }
+
+        if (
+            fieldType == Schema.DisplayType.Integer
+            || fieldType == Schema.DisplayType.Long
+        ) {
+            return Integer.valueOf(String.valueOf(value));
+        }
+
+        if (
+            fieldType == Schema.DisplayType.Double
+            || fieldType == Schema.DisplayType.Currency
+            || fieldType == Schema.DisplayType.Percent
+        ) {
+            return Decimal.valueOf(String.valueOf(value));
+        }
+
+        if (fieldType == Schema.DisplayType.Reference || fieldType == Schema.DisplayType.Id) {
+            return String.valueOf(value);
+        }
+
+        return value;
+    }
+
+    private static Datetime coerceDateTime(Object value) {
+        if (value instanceof Datetime) {
+            return (Datetime) value;
+        }
+
+        String text = String.valueOf(value);
+        if (String.isBlank(text)) {
+            return null;
+        }
+
+        String normalized = text.trim().replace('T', ' ');
+        Integer dotIndex = normalized.indexOf('.');
+        if (dotIndex > -1) {
+            normalized = normalized.substring(0, dotIndex);
+        }
+
+        if (normalized.endsWith('Z')) {
+            normalized = normalized.substring(0, normalized.length() - 1);
+            return Datetime.valueOfGmt(normalized);
+        }
+
+        return Datetime.valueOf(normalized);
+    }
+
+    private static Date coerceDate(Object value) {
+        if (value instanceof Date) {
+            return (Date) value;
+        }
+
+        String text = String.valueOf(value);
+        if (String.isBlank(text)) {
+            return null;
+        }
+
+        if (text.contains('T')) {
+            text = text.substring(0, text.indexOf('T'));
+        }
+
+        return Date.valueOf(text);
+    }
+
+    private static Boolean coerceBoolean(Object value) {
+        if (value instanceof Boolean) {
+            return (Boolean) value;
+        }
+
+        String text = String.valueOf(value).toLowerCase();
+        return text == 'true' || text == '1';
     }
 
     private static List<Map<String, Object>> recordsToMaps(List<SObject> records, List<String> fields) {

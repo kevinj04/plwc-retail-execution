@@ -6,6 +6,11 @@ const process = {
   }
 };
 
+import _lightningCombobox from 'lightning/combobox';
+import _lightningInput from 'lightning/input';
+import _lightningButton from 'lightning/button';
+import _lightningCard from 'lightning/card';
+
 /**
  * Copyright (c) 2026 Salesforce, Inc.
  */
@@ -9147,145 +9152,465 @@ ElementDescriptors.shadowRoot.get;
 
 function stylesheet(token, useActualHostSelector, useNativeDirPseudoclass) {
   var shadowSelector = token ? ("[" + token + "]") : "";
-  return ".record-detail" + shadowSelector + " {display: block;padding: 1rem;color: #181818;}.detail-section" + shadowSelector + " + .detail-section" + shadowSelector + " {margin-top: 1rem;}.detail-section" + shadowSelector + " h2" + shadowSelector + " {margin: 0 0 0.75rem;font-size: 0.95rem;font-weight: 700;}.detail-row" + shadowSelector + " {display: grid;grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));gap: 0.75rem;margin-bottom: 0.75rem;}.detail-field" + shadowSelector + " {border-bottom: 1px solid #dddbda;padding-bottom: 0.5rem;}.field-label" + shadowSelector + " {color: #444;font-size: 0.75rem;font-weight: 600;text-transform: uppercase;letter-spacing: 0.04em;}.field-value" + shadowSelector + " {margin-top: 0.25rem;min-height: 1.5rem;}.required" + shadowSelector + " {color: #b60505;margin-left: 0.15rem;}.empty" + shadowSelector + " {color: #706e6b;}.state" + shadowSelector + " {color: #444;}.error" + shadowSelector + " {color: #b60505;}";
+  return ".retail-execution" + shadowSelector + " {display: block;padding: 0.75rem 1rem 1rem;}.panel-state" + shadowSelector + " {padding: 1rem;}.panel-state_error" + shadowSelector + " {color: #8b1e1e;}.summary-line" + shadowSelector + " {margin: 0 0 0.85rem;color: #181818;line-height: 1.5;}.summary-label" + shadowSelector + ",.detail-label" + shadowSelector + " {font-weight: 700;}.entry-grid" + shadowSelector + " {display: grid;grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));gap: 0.75rem;align-items: start;}.field" + shadowSelector + " {display: block;}.field_short" + shadowSelector + " {max-width: 10rem;}.field-checkbox" + shadowSelector + " {margin-top: 0.5rem;}.actions" + shadowSelector + " {display: flex;flex-wrap: wrap;gap: 0.75rem;align-items: center;margin-top: 0.85rem;}.actions_single" + shadowSelector + " {margin-top: 0.65rem;}.visit-link" + shadowSelector + " {margin-left: 0.35rem;padding: 0;border: 0;background: transparent;color: #0176d3;cursor: pointer;font: inherit;text-decoration: underline;}.visit-link:hover" + shadowSelector + ",.visit-link:focus" + shadowSelector + " {color: #014486;}.visit-panel" + shadowSelector + " {margin-top: 0.85rem;padding: 0.85rem 1rem;border: 1px solid #d8dde6;border-radius: 0.25rem;background: #f8fafc;}.detail-row" + shadowSelector + " {margin: 0 0 0.45rem;line-height: 1.45;}.detail-row:last-of-type" + shadowSelector + " {margin-bottom: 0;}";
   /*LWC compiler v8.28.2*/
 }
 var _implicitStylesheets = [stylesheet];
 
 const stc0 = {
-  classMap: {
-    "record-detail": true
+  props: {
+    "title": "Retail Execution"
   },
   key: 0
 };
 const stc1 = {
   classMap: {
-    "state": true
+    "panel-state": true
   },
   key: 2
 };
 const stc2 = {
   classMap: {
-    "state": true,
-    "error": true
+    "panel-state": true,
+    "panel-state_error": true
   },
   key: 3
 };
 const stc3 = {
-  "detail-section": true
+  classMap: {
+    "retail-execution": true
+  },
+  key: 4
 };
 const stc4 = {
+  classMap: {
+    "summary-line": true
+  },
   key: 5
 };
 const stc5 = {
-  "detail-row": true
+  classMap: {
+    "summary-label": true
+  },
+  key: 6
 };
 const stc6 = {
-  "detail-field": true
+  key: 7
 };
 const stc7 = {
   classMap: {
-    "field-label": true
+    "summary-line": true
   },
-  key: 8
+  key: 9
 };
 const stc8 = {
   classMap: {
-    "required": true
+    "summary-label": true
   },
   key: 10
 };
 const stc9 = {
-  classMap: {
-    "field-value": true
-  },
   key: 11
 };
 const stc10 = {
   classMap: {
-    "empty": true
+    "entry-grid": true
   },
-  key: 13
+  key: 12
+};
+const stc11 = {
+  "field": true,
+  "field_short": true
+};
+const stc12 = {
+  "field-checkbox": true
+};
+const stc13 = {
+  classMap: {
+    "actions": true
+  },
+  key: 16
+};
+const stc14 = {
+  classMap: {
+    "summary-line": true
+  },
+  key: 19
+};
+const stc15 = {
+  classMap: {
+    "summary-label": true
+  },
+  key: 20
+};
+const stc16 = {
+  key: 21
+};
+const stc17 = {
+  "visit-link": true
+};
+const stc18 = {
+  "type": "button"
+};
+const stc19 = {
+  classMap: {
+    "actions": true,
+    "actions_single": true
+  },
+  key: 24
+};
+const stc20 = {
+  classMap: {
+    "visit-panel": true
+  },
+  key: 27
+};
+const stc21 = {
+  "detail-row": true
+};
+const stc22 = {
+  classMap: {
+    "detail-label": true
+  },
+  key: 29
+};
+const stc23 = {
+  key: 30
+};
+const stc24 = {
+  classMap: {
+    "actions": true,
+    "actions_single": true
+  },
+  key: 31
+};
+const stc25 = {
+  "variant": "neutral",
+  "label": "Close"
 };
 function tmpl$2($api, $cmp, $slotset, $ctx) {
-  const {t: api_text, h: api_element, fr: api_fragment, d: api_dynamic_text, k: api_key, i: api_iterator, f: api_flatten} = $api;
-  return [api_element("section", stc0, [$cmp.isLoading ? api_fragment(1, [api_element("div", stc1, [api_text("Loading...")])], 0) : $cmp.hasError ? api_fragment(1, [api_element("div", stc2, [api_text(api_dynamic_text($cmp.errorMessage))])], 0) : $cmp.hasSections ? api_fragment(1, api_iterator($cmp.sections, function (section) {
-    return api_element("article", {
-      classMap: stc3,
-      key: api_key(4, section.heading)
-    }, api_flatten([api_element("h2", stc4, [api_text(api_dynamic_text(section.heading))]), api_iterator(section.rows, function (row) {
-      return api_element("div", {
-        classMap: stc5,
-        key: api_key(6, row.key)
-      }, api_iterator(row.fields, function (field) {
-        return api_element("div", {
-          classMap: stc6,
-          key: api_key(7, field.apiName)
-        }, [api_element("div", stc7, [api_text(api_dynamic_text(field.label)), field.required ? api_fragment(9, [api_element("span", stc8, [api_text("*")])], 0) : null]), api_element("div", stc9, [field.isEmpty ? api_fragment(12, [api_element("span", stc10, [api_text("--")])], 0) : api_fragment(12, [api_text(api_dynamic_text(field.value))], 0)])]);
-      }));
-    })]));
-  }), 0) : null])];
+  const {t: api_text, h: api_element, fr: api_fragment, d: api_dynamic_text, b: api_bind, c: api_custom_element, k: api_key, i: api_iterator, f: api_flatten} = $api;
+  const {_m0, _m1, _m2, _m3, _m4, _m5, _m6, _m7} = $ctx;
+  return [api_custom_element("lightning-card", _lightningCard, stc0, [$cmp.isLoading ? api_fragment(1, [api_element("div", stc1, [api_text("Loading retail execution...")])], 0) : $cmp.hasError ? api_fragment(1, [api_element("div", stc2, [api_text(api_dynamic_text($cmp.errorMessage))])], 0) : api_fragment(1, [api_element("div", stc3, [api_element("p", stc4, [api_element("span", stc5, [api_text("Store:")]), api_element("span", stc6, [api_text(api_dynamic_text($cmp.accountName))])]), $cmp.isCheckedIn ? api_fragment(8, [api_element("p", stc7, [api_element("span", stc8, [api_text("Checked In:")]), api_element("span", stc9, [api_text(api_dynamic_text($cmp.checkedInDisplay))])]), api_element("div", stc10, [api_custom_element("lightning-combobox", _lightningCombobox, {
+    classMap: stc11,
+    props: {
+      "name": "Shelf_Condition__c",
+      "label": "Shelf Condition",
+      "options": $cmp.shelfOptions,
+      "value": $cmp.draftVisit.shelfCondition,
+      "disabled": $cmp.isSaving
+    },
+    key: 13,
+    on: _m0 || ($ctx._m0 = {
+      "change": api_bind($cmp.handleFieldChange)
+    })
+  }), api_custom_element("lightning-input", _lightningInput, {
+    classMap: stc11,
+    props: {
+      "name": "Promotional_Display_Count__c",
+      "type": "number",
+      "label": "Display Count",
+      "value": $cmp.draftVisit.promotionalDisplayCount,
+      "disabled": $cmp.isSaving
+    },
+    key: 14,
+    on: _m1 || ($ctx._m1 = {
+      "change": api_bind($cmp.handleFieldChange)
+    })
+  })]), api_custom_element("lightning-input", _lightningInput, {
+    classMap: stc12,
+    props: {
+      "name": "Spoke_To_Manager__c",
+      "type": "checkbox",
+      "label": "Spoke To Manager",
+      "checked": $cmp.draftVisit.spokeToManager,
+      "disabled": $cmp.isSaving
+    },
+    key: 15,
+    on: _m2 || ($ctx._m2 = {
+      "change": api_bind($cmp.handleFieldChange)
+    })
+  }), api_element("div", stc13, [api_custom_element("lightning-button", _lightningButton, {
+    props: {
+      "variant": "neutral",
+      "label": "Cancel",
+      "disabled": $cmp.isSaving
+    },
+    key: 17,
+    on: _m3 || ($ctx._m3 = {
+      "click": api_bind($cmp.handleCancelDraft)
+    })
+  }), api_custom_element("lightning-button", _lightningButton, {
+    props: {
+      "variant": "brand",
+      "label": $cmp.saveButtonLabel,
+      "disabled": $cmp.isSaving
+    },
+    key: 18,
+    on: _m4 || ($ctx._m4 = {
+      "click": api_bind($cmp.handleSaveDraft)
+    })
+  })])], 0) : api_fragment(8, [api_element("p", stc14, [api_element("span", stc15, [api_text("Last Visit:")]), api_element("span", stc16, [api_text(api_dynamic_text($cmp.lastVisitDisplay))]), $cmp.lastVisitName ? api_fragment(22, [api_element("button", {
+    classMap: stc17,
+    attrs: stc18,
+    key: 23,
+    on: _m5 || ($ctx._m5 = {
+      "click": api_bind($cmp.handleShowLastVisit)
+    })
+  }, [api_text(api_dynamic_text($cmp.lastVisitName))])], 0) : null]), api_element("div", stc19, [api_custom_element("lightning-button", _lightningButton, {
+    props: {
+      "label": "Check In",
+      "variant": "brand",
+      "disabled": $cmp.isLoading
+    },
+    key: 25,
+    on: _m6 || ($ctx._m6 = {
+      "click": api_bind($cmp.handleStartVisit)
+    })
+  })]), $cmp.isViewingLastVisit ? api_fragment(26, [api_element("section", stc20, api_flatten([api_iterator($cmp.viewingVisitRows, function (row) {
+    return api_element("p", {
+      classMap: stc21,
+      key: api_key(28, row.key)
+    }, [api_element("span", stc22, [api_text(api_dynamic_text(row.label) + ":")]), api_element("span", stc23, [api_text(api_dynamic_text(row.value))])]);
+  }), api_element("div", stc24, [api_custom_element("lightning-button", _lightningButton, {
+    props: stc25,
+    key: 32,
+    on: _m7 || ($ctx._m7 = {
+      "click": api_bind($cmp.handleCloseLastVisit)
+    })
+  })])]))], 0) : null], 0)])], 0)])];
   /*LWC compiler v8.28.2*/
 }
 var _tmpl$2 = registerTemplate(tmpl$2);
 tmpl$2.stylesheets = [];
-tmpl$2.stylesheetToken = "lwc-s5tbc2fgn9";
-tmpl$2.legacyStylesheetToken = "lwc-recordDetailView_recordDetailView";
+tmpl$2.stylesheetToken = "lwc-1g4ptsesf7u";
+tmpl$2.legacyStylesheetToken = "lwc-retailExecutionView_retailExecutionView";
 if (_implicitStylesheets) {
   tmpl$2.stylesheets.push.apply(tmpl$2.stylesheets, _implicitStylesheets);
 }
 freezeTemplate(tmpl$2);
 
-class RecordDetailView extends LightningElement {
+class RetailExecutionView extends LightningElement {
   constructor(...args) {
     super(...args);
-    this.sections = [];
-    this.errorMessage = '';
+    this.accountName = '';
+    this.lastVisit = null;
+    this.draftVisit = null;
+    this.viewingVisit = null;
+    this.shelfConditionField = null;
     this.isLoading = false;
+    this.isSaving = false;
+    this.errorMessage = '';
   }
   get hasError() {
     return Boolean(this.errorMessage);
   }
-  get hasSections() {
-    return this.sections.length > 0;
+  get isCheckedIn() {
+    return Boolean(this.draftVisit);
+  }
+  get isViewingLastVisit() {
+    return Boolean(this.viewingVisit);
+  }
+  get shelfOptions() {
+    return this.shelfConditionField?.picklistValues ?? [];
+  }
+  get lastVisitName() {
+    return this.lastVisit?.name ?? '';
+  }
+  get hasLastVisit() {
+    return Boolean(this.lastVisit);
+  }
+  get lastVisitDisplay() {
+    const checkInAt = this.lastVisit?.checkInAt;
+    if (!checkInAt) {
+      return 'No recorded visits.';
+    }
+    return formatDate(checkInAt, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    });
+  }
+  get checkedInDisplay() {
+    const checkInAt = this.draftVisit?.checkInAt;
+    if (!checkInAt) {
+      return this.lastVisitDisplay;
+    }
+    return formatDate(checkInAt, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    });
+  }
+  get saveButtonLabel() {
+    return this.isSaving ? 'Checking Out...' : 'Check-Out';
+  }
+  get canInteract() {
+    return !this.isLoading && !this.isSaving;
+  }
+  get viewingVisitRows() {
+    if (!this.viewingVisit) {
+      return [];
+    }
+    return [{
+      key: 'name',
+      label: 'Visit',
+      value: this.viewingVisit.name || '--'
+    }, {
+      key: 'checkin',
+      label: 'Check In',
+      value: formatDateTimeOrFallback(this.viewingVisit.checkInAt)
+    }, {
+      key: 'checkout',
+      label: 'Check Out',
+      value: formatDateTimeOrFallback(this.viewingVisit.checkOutAt)
+    }, {
+      key: 'shelf',
+      label: 'Shelf Condition',
+      value: this.viewingVisit.shelfCondition || '--'
+    }, {
+      key: 'display',
+      label: 'Display Count',
+      value: formatNumberOrFallback(this.viewingVisit.promotionalDisplayCount)
+    }, {
+      key: 'manager',
+      label: 'Spoke To Manager',
+      value: this.viewingVisit.spokeToManager ? 'Yes' : 'No'
+    }];
+  }
+  handleStartVisit() {
+    this.dispatchEvent(new CustomEvent('startvisit'));
+  }
+  handleCancelDraft() {
+    this.dispatchEvent(new CustomEvent('canceldraft'));
+  }
+  handleSaveDraft() {
+    this.dispatchEvent(new CustomEvent('savedraft'));
+  }
+  handleShowLastVisit() {
+    this.dispatchEvent(new CustomEvent('showlastvisit'));
+  }
+  handleCloseLastVisit() {
+    this.dispatchEvent(new CustomEvent('closelastvisit'));
+  }
+  handleFieldChange(event) {
+    const fieldName = event.target.name;
+    let value;
+    if (event.target.type === 'checkbox') {
+      value = event.target.checked;
+    } else if (event.detail && event.detail.value !== undefined) {
+      value = event.detail.value;
+    } else {
+      value = event.target.value;
+    }
+    this.dispatchEvent(new CustomEvent('draftchange', {
+      detail: {
+        fieldName,
+        value
+      }
+    }));
   }
   /*LWC compiler v8.28.2*/
 }
-registerDecorators(RecordDetailView, {
+registerDecorators(RetailExecutionView, {
   publicProps: {
-    sections: {
+    accountName: {
       config: 0
     },
-    errorMessage: {
+    lastVisit: {
+      config: 0
+    },
+    draftVisit: {
+      config: 0
+    },
+    viewingVisit: {
+      config: 0
+    },
+    shelfConditionField: {
       config: 0
     },
     isLoading: {
       config: 0
+    },
+    isSaving: {
+      config: 0
+    },
+    errorMessage: {
+      config: 0
     }
   }
 });
-const __lwc_component_class_internal$2 = registerComponent(RecordDetailView, {
+const __lwc_component_class_internal$2 = registerComponent(RetailExecutionView, {
   tmpl: _tmpl$2,
-  sel: "lwc-record-detail-view",
+  sel: "lwc-retail-execution-view",
   apiVersion: 66
 });
+function formatDate(value, options) {
+  const dateValue = parseDate(value);
+  if (!dateValue) {
+    return '--';
+  }
+  return new Intl.DateTimeFormat(undefined, options).format(dateValue);
+}
+function formatDateTimeOrFallback(value) {
+  const dateValue = parseDate(value);
+  if (!dateValue) {
+    return '--';
+  }
+  return new Intl.DateTimeFormat(undefined, {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit'
+  }).format(dateValue);
+}
+function formatNumberOrFallback(value) {
+  if (value === null || value === undefined || value === '') {
+    return '--';
+  }
+  return String(value);
+}
+function parseDate(value) {
+  if (!value) {
+    return null;
+  }
+  const dateValue = new Date(value);
+  return Number.isNaN(dateValue.getTime()) ? null : dateValue;
+}
 
 function tmpl$1($api, $cmp, $slotset, $ctx) {
-  const {c: api_custom_element} = $api;
-  return [api_custom_element("c-record-detail-view", __lwc_component_class_internal$2, {
+  const {b: api_bind, c: api_custom_element} = $api;
+  const {_m0} = $ctx;
+  return [api_custom_element("c-retail-execution-view", __lwc_component_class_internal$2, {
     props: {
-      "sections": $cmp.sections,
-      "errorMessage": $cmp.errorMessage,
-      "isLoading": $cmp.isLoading
+      "accountName": $cmp.accountName,
+      "lastVisit": $cmp.lastVisit,
+      "draftVisit": $cmp.draftVisit,
+      "viewingVisit": $cmp.viewingVisit,
+      "shelfConditionField": $cmp.shelfConditionField,
+      "isLoading": $cmp.isLoading,
+      "isSaving": $cmp.isSaving,
+      "errorMessage": $cmp.errorMessage
     },
-    key: 0
+    key: 0,
+    on: _m0 || ($ctx._m0 = {
+      "startvisit": api_bind($cmp.handleStartVisit),
+      "draftchange": api_bind($cmp.handleDraftChange),
+      "canceldraft": api_bind($cmp.handleCancelDraft),
+      "savedraft": api_bind($cmp.handleSaveDraft),
+      "showlastvisit": api_bind($cmp.handleShowLastVisit),
+      "closelastvisit": api_bind($cmp.handleCloseLastVisit)
+    })
   })];
   /*LWC compiler v8.28.2*/
 }
 var _tmpl$1 = registerTemplate(tmpl$1);
 tmpl$1.stylesheets = [];
-tmpl$1.stylesheetToken = "lwc-6lmpprmtqo0";
-tmpl$1.legacyStylesheetToken = "lwc-recordDetailApp_recordDetailApp";
+tmpl$1.stylesheetToken = "lwc-4gmlk6m7ift";
+tmpl$1.legacyStylesheetToken = "lwc-retailExecutionApp_retailExecutionApp";
 freezeTemplate(tmpl$1);
 
 /**
@@ -9407,6 +9732,29 @@ freezeTemplate(tmpl$1);
  * @property {string=} where
  * @property {string=} orderBy
  * @property {number=} limit
+ * @property {Record<string, string | number | boolean | null>=} filters
+ */
+
+/**
+ * @typedef {object} RetailExecutionVisitModel
+ * @property {string | null} id
+ * @property {string} accountId
+ * @property {string | null} name
+ * @property {string | null} checkInAt
+ * @property {string | null} checkOutAt
+ * @property {string | null} shelfCondition
+ * @property {number | null} promotionalDisplayCount
+ * @property {boolean} spokeToManager
+ */
+
+/**
+ * @typedef {object} RetailExecutionStateModel
+ * @property {string} accountId
+ * @property {string} accountName
+ * @property {RetailExecutionVisitModel | null} lastVisit
+ * @property {RetailExecutionVisitModel | null} draftVisit
+ * @property {FieldModel | null} shelfConditionField
+ * @property {boolean} isCheckedIn
  */
 
 /**
@@ -9486,11 +9834,52 @@ function normalizeScalar(value) {
 }
 
 /**
- * @param {FieldModel[]} fields
- * @returns {Map<string, FieldModel>}
+ * @param {RecordModel | null | undefined} record
+ * @returns {RetailExecutionVisitModel | null}
  */
-function indexFieldsByApiName(fields) {
-  return new Map(fields.map(field => [field.apiName, field]));
+function normalizeRetailExecutionVisit(record) {
+  if (!record) {
+    return null;
+  }
+  return {
+    id: record.id || null,
+    accountId: record.fields.Account__c ?? '',
+    name: record.fields.Name ?? null,
+    checkInAt: record.fields.Check_In__c ?? null,
+    checkOutAt: record.fields.Check_Out__c ?? null,
+    shelfCondition: record.fields.Shelf_Condition__c ?? null,
+    promotionalDisplayCount: normalizeNullableNumber(record.fields.Promotional_Display_Count__c),
+    spokeToManager: normalizeBoolean(record.fields.Spoke_To_Manager__c)
+  };
+}
+
+/**
+ * @param {string | null | undefined} value
+ * @returns {number | null}
+ */
+function normalizeNullableNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : null;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {boolean}
+ */
+function normalizeBoolean(value) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+  if (typeof value === 'string') {
+    return value.toLowerCase() === 'true';
+  }
+  if (typeof value === 'number') {
+    return value !== 0;
+  }
+  return false;
 }
 
 /**
@@ -9629,142 +10018,220 @@ function assertDataAdapter(adapter) {
 /**
  * @typedef {import('c/dataAdapter').DataAdapter} DataAdapter
  * @typedef {import('c/sharedModels').FieldModel} FieldModel
- * @typedef {import('c/sharedModels').LayoutModel} LayoutModel
- * @typedef {import('c/sharedModels').RecordDetailViewModel} RecordDetailViewModel
- * @typedef {import('c/sharedModels').RecordFieldViewModel} RecordFieldViewModel
- * @typedef {import('c/sharedModels').RecordModel} RecordModel
+ * @typedef {import('c/sharedModels').RetailExecutionStateModel} RetailExecutionStateModel
+ * @typedef {import('c/sharedModels').RetailExecutionVisitModel} RetailExecutionVisitModel
  */
 
+const ACCOUNT_OBJECT_API_NAME = 'Account';
+const STORE_VISIT_OBJECT_API_NAME = 'Store_Visit__c';
+const STORE_VISIT_FIELD_NAMES = ['Id', 'Name', 'Account__c', 'Check_In__c', 'Check_Out__c', 'Shelf_Condition__c', 'Promotional_Display_Count__c', 'Spoke_To_Manager__c'];
+
 /**
- * Loads normalized record detail data from a runtime adapter and maps it into a metadata-driven view model.
+ * Shared runtime-neutral loader for the retail-execution workflow.
  *
  * @param {DataAdapter} adapter
- * @param {string} objectApiName
- * @param {string} recordId
- * @returns {Promise<RecordDetailViewModel>}
+ * @param {{ accountId: string }} input
+ * @returns {Promise<RetailExecutionStateModel>}
  */
-async function loadRecordDetail(adapter, objectApiName, recordId) {
+async function loadRetailExecutionState(adapter, input) {
   assertDataAdapter(adapter);
-  const record = await adapter.loadRecord(objectApiName, recordId);
-  if (!record) {
-    throw new Error(`Record ${objectApiName}:${recordId} was not found.`);
+  const accountId = input?.accountId ?? '';
+  if (!accountId) {
+    throw new Error('An accountId is required before loading retail execution.');
   }
-  const recordTypeId = record.fields.RecordTypeId ?? null;
-  console.log('[loadRecordDetail] recordTypeId', {
-    objectApiName,
-    recordId,
-    recordTypeId,
-    fieldKeys: Object.keys(record.fields)
-  });
-  const [schema, layout] = await Promise.all([adapter.getObjectSchema(objectApiName), adapter.getLayout({
-    objectApiName,
-    mode: 'view',
-    recordTypeId
+  const [accountRecords, visitSchema, visitRecords] = await Promise.all([adapter.queryRecords(ACCOUNT_OBJECT_API_NAME, {
+    fields: ['Id', 'Name'],
+    filters: {
+      Id: accountId
+    },
+    limit: 1
+  }), adapter.getObjectSchema(STORE_VISIT_OBJECT_API_NAME), adapter.queryRecords(STORE_VISIT_OBJECT_API_NAME, {
+    fields: STORE_VISIT_FIELD_NAMES,
+    filters: {
+      Account__c: accountId
+    },
+    orderBy: 'Check_In__c DESC',
+    limit: 1
   })]);
-  const fieldIndex = indexFieldsByApiName(schema.fields);
-  return createRecordDetailViewModel(objectApiName, record, fieldIndex, layout);
+  return createRetailExecutionStateModel({
+    accountId,
+    accountName: accountRecords[0]?.fields?.Name ?? '',
+    lastVisitRecord: visitRecords[0] ?? null,
+    visitFields: visitSchema.fields
+  });
 }
 
 /**
- * @param {string} objectApiName
- * @param {RecordModel} record
- * @param {Map<string, FieldModel> | FieldModel[]} fieldIndexOrFields
- * @param {LayoutModel} layout
- * @returns {RecordDetailViewModel}
+ * @param {{
+ *   accountId: string,
+ *   accountName?: string,
+ *   lastVisitRecord?: import('c/sharedModels').RecordModel | null,
+ *   draftVisit?: RetailExecutionVisitModel | null,
+ *   visitFields?: FieldModel[]
+ * }} input
+ * @returns {RetailExecutionStateModel}
  */
-function createRecordDetailViewModel(objectApiName, record, fieldIndexOrFields, layout) {
-  const fieldIndex = fieldIndexOrFields instanceof Map ? fieldIndexOrFields : indexFieldsByApiName(fieldIndexOrFields);
-  const sections = createSections(layout, fieldIndex, record);
+function createRetailExecutionStateModel(input) {
+  const draftVisit = input.draftVisit ?? null;
   return {
-    objectApiName,
-    recordId: record.id,
-    sections
+    accountId: input.accountId,
+    accountName: input.accountName ?? '',
+    lastVisit: normalizeRetailExecutionVisit(input.lastVisitRecord ?? null),
+    draftVisit,
+    shelfConditionField: findField(input.visitFields, 'Shelf_Condition__c'),
+    isCheckedIn: Boolean(draftVisit)
   };
 }
 
 /**
- * @param {LayoutModel} layout
- * @param {Map<string, FieldModel>} fieldIndex
- * @param {RecordModel} record
- * @returns {import('c/sharedModels').RecordDetailSectionViewModel[]}
+ * Creates the in-memory visit draft that the shared UI will edit before save.
+ *
+ * @param {string} accountId
+ * @param {string=} checkedInAt
+ * @returns {RetailExecutionVisitModel}
  */
-function createSections(layout, fieldIndex, record) {
-  if (!layout.sections.length) {
-    return [{
-      heading: 'Details',
-      rows: createFallbackRows(fieldIndex, record)
-    }];
+function createRetailExecutionDraft(accountId, checkedInAt = new Date().toISOString()) {
+  if (!accountId) {
+    throw new Error('An accountId is required before starting a retail visit draft.');
   }
-  return layout.sections.map(section => ({
-    heading: section.heading || 'Details',
-    rows: section.rows.map((row, rowIndex) => ({
-      key: `${section.heading || 'Details'}-${rowIndex}`,
-      fields: row.items.filter(item => !item.placeholder).map(item => {
-        const component = item.components.find(candidate => candidate.value in record.fields);
-        if (!component) {
-          return null;
-        }
-        const field = fieldIndex.get(component.value);
-        return createFieldViewModel(field, component.value, record.fields[component.value]);
-      }).filter(Boolean)
-    })).filter(row => row.fields.length > 0)
-  }));
-}
-
-/**
- * @param {Map<string, FieldModel>} fieldIndex
- * @param {RecordModel} record
- * @returns {{ key: string, fields: RecordFieldViewModel[] }[]}
- */
-function createFallbackRows(fieldIndex, record) {
-  return Array.from(fieldIndex.values()).filter(field => shouldDisplayField(field.apiName, field)).map(field => ({
-    key: field.apiName,
-    fields: [createFieldViewModel(field, field.apiName, record.fields[field.apiName])]
-  }));
-}
-
-/**
- * @param {FieldModel | undefined} field
- * @param {string} apiName
- * @param {string | null | undefined} rawValue
- * @returns {RecordFieldViewModel}
- */
-function createFieldViewModel(field, apiName, rawValue) {
-  const value = rawValue ?? '';
   return {
-    apiName,
-    label: field?.label ?? apiName,
-    value,
-    isEmpty: value === '',
-    dataType: field?.dataType ?? 'string',
-    required: Boolean(field?.required),
-    inlineHelpText: field?.inlineHelpText
+    id: null,
+    accountId,
+    name: null,
+    checkInAt: checkedInAt,
+    checkOutAt: null,
+    shelfCondition: null,
+    promotionalDisplayCount: null,
+    spokeToManager: false
   };
 }
 
 /**
- * @param {string} apiName
- * @param {FieldModel} field
- * @returns {boolean}
+ * @param {RetailExecutionVisitModel} draftVisit
+ * @param {string} fieldName
+ * @param {unknown} rawValue
+ * @returns {RetailExecutionVisitModel}
  */
-function shouldDisplayField(apiName, field) {
-  if (apiName === 'Id') {
-    return false;
+function updateRetailExecutionDraft(draftVisit, fieldName, rawValue) {
+  if (!draftVisit) {
+    throw new Error('A retail visit draft is required before it can be updated.');
   }
-  return field.dataType !== 'base64';
+  switch (fieldName) {
+    case 'Shelf_Condition__c':
+      return {
+        ...draftVisit,
+        shelfCondition: normalizeNullableString(rawValue)
+      };
+    case 'Promotional_Display_Count__c':
+      return {
+        ...draftVisit,
+        promotionalDisplayCount: normalizeDraftNumber(rawValue)
+      };
+    case 'Spoke_To_Manager__c':
+      return {
+        ...draftVisit,
+        spokeToManager: Boolean(rawValue)
+      };
+    case 'Check_In__c':
+      return {
+        ...draftVisit,
+        checkInAt: normalizeNullableString(rawValue)
+      };
+    case 'Check_Out__c':
+      return {
+        ...draftVisit,
+        checkOutAt: normalizeNullableString(rawValue)
+      };
+    case 'Name':
+      return {
+        ...draftVisit,
+        name: normalizeNullableString(rawValue)
+      };
+    default:
+      throw new Error(`Retail execution does not support updating field ${fieldName}.`);
+  }
 }
 
-class RecordDetailApp extends LightningElement {
+/**
+ * @param {DataAdapter} adapter
+ * @param {RetailExecutionVisitModel} draftVisit
+ * @param {string=} checkedOutAt
+ * @returns {Promise<RetailExecutionVisitModel>}
+ */
+async function saveRetailExecutionDraft(adapter, draftVisit, checkedOutAt = new Date().toISOString()) {
+  assertDataAdapter(adapter);
+  if (!draftVisit) {
+    throw new Error('A retail visit draft is required before save.');
+  }
+  if (!draftVisit.accountId) {
+    throw new Error('A retail visit draft must include an accountId before save.');
+  }
+  const fields = {
+    Account__c: draftVisit.accountId,
+    Check_In__c: draftVisit.checkInAt,
+    Check_Out__c: checkedOutAt,
+    Shelf_Condition__c: draftVisit.shelfCondition,
+    Promotional_Display_Count__c: draftVisit.promotionalDisplayCount,
+    Spoke_To_Manager__c: draftVisit.spokeToManager
+  };
+  const id = await adapter.createRecord(STORE_VISIT_OBJECT_API_NAME, fields);
+  return {
+    ...draftVisit,
+    id,
+    checkOutAt: checkedOutAt
+  };
+}
+
+/**
+ * @param {FieldModel[] | undefined} fields
+ * @param {string} apiName
+ * @returns {FieldModel | null}
+ */
+function findField(fields, apiName) {
+  if (!Array.isArray(fields)) {
+    return null;
+  }
+  return fields.find(field => field.apiName === apiName) ?? null;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {string | null}
+ */
+function normalizeNullableString(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+  return String(value);
+}
+
+/**
+ * @param {unknown} value
+ * @returns {number | null}
+ */
+function normalizeDraftNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+  const numericValue = Number(value);
+  return Number.isFinite(numericValue) ? numericValue : null;
+}
+
+class RetailExecutionApp extends LightningElement {
   constructor(...args) {
     super(...args);
     this._adapter = void 0;
-    this._objectApiName = '';
-    this._recordId = '';
+    this._accountId = '';
     this._isConnected = false;
     this._refreshVersion = 0;
-    this.sections = [];
+    this.accountName = '';
+    this.lastVisit = null;
+    this.draftVisit = null;
+    this.viewingVisit = null;
+    this.shelfConditionField = null;
     this.errorMessage = '';
     this.isLoading = false;
+    this.isSaving = false;
   }
   get adapter() {
     return this._adapter;
@@ -9773,18 +10240,11 @@ class RecordDetailApp extends LightningElement {
     this._adapter = value;
     this.queueRefresh();
   }
-  get objectApiName() {
-    return this._objectApiName;
+  get accountId() {
+    return this._accountId;
   }
-  set objectApiName(value) {
-    this._objectApiName = value || '';
-    this.queueRefresh();
-  }
-  get recordId() {
-    return this._recordId;
-  }
-  set recordId(value) {
-    this._recordId = value || '';
+  set accountId(value) {
+    this._accountId = value || '';
     this.queueRefresh();
   }
   connectedCallback() {
@@ -9798,83 +10258,163 @@ class RecordDetailApp extends LightningElement {
   async refresh() {
     const refreshVersion = ++this._refreshVersion;
     if (!this._adapter) {
-      this.sections = [];
-      this.errorMessage = 'A data adapter is required before loading record detail.';
-      this.isLoading = false;
+      this.resetState();
+      this.errorMessage = 'A data adapter is required before loading retail execution.';
       return;
     }
-    if (!this._objectApiName || !this._recordId) {
-      this.sections = [];
-      this.errorMessage = 'Set both object-api-name and record-id before loading record detail.';
-      this.isLoading = false;
+    if (!this._accountId) {
+      this.resetState();
+      this.errorMessage = 'Set account-id before loading retail execution.';
       return;
     }
     this.isLoading = true;
     this.errorMessage = '';
     try {
-      // This is the runtime-neutral entrypoint for record-detail loading.
-      // Hosts provide context plus an adapter; the shared service does the rest.
-      const detail = await loadRecordDetail(this._adapter, this._objectApiName, this._recordId);
-      if (!this._isConnected || refreshVersion !== this._refreshVersion) {
+      const state = await loadRetailExecutionState(this._adapter, {
+        accountId: this._accountId
+      });
+      if (!this.shouldApply(refreshVersion)) {
         return;
       }
-      this.sections = detail.sections;
+      this.accountName = state.accountName;
+      this.lastVisit = state.lastVisit;
+      this.draftVisit = null;
+      this.viewingVisit = null;
+      this.shelfConditionField = state.shelfConditionField;
+      this.errorMessage = '';
     } catch (error) {
-      if (!this._isConnected || refreshVersion !== this._refreshVersion) {
+      if (!this.shouldApply(refreshVersion)) {
         return;
       }
-      this.sections = [];
-      this.errorMessage = error instanceof Error ? error.message : 'Unexpected record detail error.';
+      this.resetState();
+      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution error.';
     } finally {
-      if (!this._isConnected || refreshVersion !== this._refreshVersion) {
+      if (!this.shouldApply(refreshVersion)) {
         return;
       }
       this.isLoading = false;
     }
   }
+  get isCheckedIn() {
+    return Boolean(this.draftVisit);
+  }
+  get isViewingVisit() {
+    return Boolean(this.viewingVisit);
+  }
+  handleStartVisit() {
+    if (!this._accountId || this.isLoading || this.isSaving) {
+      return;
+    }
+    this.draftVisit = createRetailExecutionDraft(this._accountId);
+    this.viewingVisit = null;
+    this.errorMessage = '';
+  }
+  handleDraftChange(event) {
+    if (!this.draftVisit || this.isSaving) {
+      return;
+    }
+    const {
+      fieldName,
+      value
+    } = event.detail || {};
+    if (!fieldName) {
+      return;
+    }
+    this.draftVisit = updateRetailExecutionDraft(this.draftVisit, fieldName, value);
+  }
+  handleCancelDraft() {
+    if (this.isSaving) {
+      return;
+    }
+    this.draftVisit = null;
+  }
+  async handleSaveDraft() {
+    if (!this.draftVisit || this.isSaving) {
+      return;
+    }
+    this.isSaving = true;
+    this.errorMessage = '';
+    try {
+      const savedVisit = await saveRetailExecutionDraft(this._adapter, this.draftVisit);
+      this.lastVisit = savedVisit;
+      this.draftVisit = null;
+      this.viewingVisit = null;
+      this.dispatchEvent(new CustomEvent('save', {
+        detail: {
+          visitId: savedVisit.id
+        }
+      }));
+    } catch (error) {
+      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution save error.';
+    } finally {
+      this.isSaving = false;
+    }
+  }
+  handleShowLastVisit() {
+    if (!this.lastVisit || this.isCheckedIn) {
+      return;
+    }
+    this.viewingVisit = {
+      ...this.lastVisit
+    };
+  }
+  handleCloseLastVisit() {
+    this.viewingVisit = null;
+  }
   queueRefresh() {
     if (!this._isConnected) {
       return;
     }
-
-    // The app refreshes whenever the host changes adapter or record context.
     void this.refresh();
+  }
+  shouldApply(refreshVersion) {
+    return this._isConnected && refreshVersion === this._refreshVersion;
+  }
+  resetState() {
+    this.accountName = '';
+    this.lastVisit = null;
+    this.draftVisit = null;
+    this.viewingVisit = null;
+    this.shelfConditionField = null;
+    this.isLoading = false;
+    this.isSaving = false;
   }
   /*LWC compiler v8.28.2*/
 }
-registerDecorators(RecordDetailApp, {
+registerDecorators(RetailExecutionApp, {
   publicProps: {
     adapter: {
       config: 3
     },
-    objectApiName: {
-      config: 3
-    },
-    recordId: {
+    accountId: {
       config: 3
     }
   },
   publicMethods: ["refresh"],
   track: {
-    sections: 1,
+    accountName: 1,
+    lastVisit: 1,
+    draftVisit: 1,
+    viewingVisit: 1,
+    shelfConditionField: 1,
     errorMessage: 1,
-    isLoading: 1
+    isLoading: 1,
+    isSaving: 1
   },
-  fields: ["_adapter", "_objectApiName", "_recordId", "_isConnected", "_refreshVersion"]
+  fields: ["_adapter", "_accountId", "_isConnected", "_refreshVersion"]
 });
-const __lwc_component_class_internal$1 = registerComponent(RecordDetailApp, {
+const __lwc_component_class_internal$1 = registerComponent(RetailExecutionApp, {
   tmpl: _tmpl$1,
-  sel: "lwc-record-detail-app",
+  sel: "lwc-retail-execution-app",
   apiVersion: 66
 });
 
 function tmpl($api, $cmp, $slotset, $ctx) {
   const {c: api_custom_element} = $api;
-  return [api_custom_element("c-record-detail-app", __lwc_component_class_internal$1, {
+  return [api_custom_element("c-retail-execution-app", __lwc_component_class_internal$1, {
     props: {
       "adapter": $cmp.adapter,
-      "objectApiName": $cmp.objectApiName,
-      "recordId": $cmp.recordId
+      "accountId": $cmp.accountId
     },
     key: 0
   })];
@@ -9882,8 +10422,8 @@ function tmpl($api, $cmp, $slotset, $ctx) {
 }
 var _tmpl = registerTemplate(tmpl);
 tmpl.stylesheets = [];
-tmpl.stylesheetToken = "lwc-586v1lcbclk";
-tmpl.legacyStylesheetToken = "lwc-pulsarRecordDetail_pulsarRecordDetail";
+tmpl.stylesheetToken = "lwc-7rha07kvjmt";
+tmpl.legacyStylesheetToken = "lwc-pulsarRetailExecution_pulsarRetailExecution";
 freezeTemplate(tmpl);
 
 const MASTER_RECORD_TYPE_ID = '012000000000000AAA';
@@ -9920,17 +10460,59 @@ class PulsarDataAdapter extends DataAdapter {
     });
     return rows?.[0] ? normalizeRecord(objectApiName, withCompoundFieldValues(rows[0])) : null;
   }
-  async queryRecords() {
-    throw new Error('PulsarDataAdapter.queryRecords() is not implemented yet.');
+
+  /**
+   * @param {string} objectApiName
+   * @param {import('c/sharedModels').QuerySpec} querySpec
+   * @returns {Promise<import('c/sharedModels').RecordModel[]>}
+   */
+  async queryRecords(objectApiName, querySpec = {}) {
+    const sdk = await this.ensureReady();
+    if (!sdk?.select) {
+      throw new Error('Pulsar SDK select() is not available.');
+    }
+    const query = buildSelectQuery(objectApiName, querySpec);
+    const rows = await sdk.select(objectApiName, query);
+    return Array.isArray(rows) ? rows.map(row => normalizeRecord(objectApiName, withCompoundFieldValues(row))) : [];
   }
-  async createRecord() {
-    throw new Error('PulsarDataAdapter.createRecord() is not implemented yet.');
+
+  /**
+   * @param {string} objectApiName
+   * @param {Record<string, unknown>} fields
+   * @returns {Promise<string>}
+   */
+  async createRecord(objectApiName, fields) {
+    const sdk = await this.ensureReady();
+    if (!sdk?.create) {
+      throw new Error('Pulsar SDK create() is not available.');
+    }
+    return sdk.create(objectApiName, withoutUndefinedFields(fields));
   }
-  async updateRecord() {
-    throw new Error('PulsarDataAdapter.updateRecord() is not implemented yet.');
+
+  /**
+   * @param {string} objectApiName
+   * @param {Record<string, unknown>} fields
+   * @returns {Promise<string>}
+   */
+  async updateRecord(objectApiName, fields) {
+    const sdk = await this.ensureReady();
+    if (!sdk?.update) {
+      throw new Error('Pulsar SDK update() is not available.');
+    }
+    return sdk.update(objectApiName, withoutUndefinedFields(fields));
   }
-  async deleteRecord() {
-    throw new Error('PulsarDataAdapter.deleteRecord() is not implemented yet.');
+
+  /**
+   * @param {string} objectApiName
+   * @param {string} id
+   * @returns {Promise<string>}
+   */
+  async deleteRecord(objectApiName, id) {
+    const sdk = await this.ensureReady();
+    if (!sdk?.delete) {
+      throw new Error('Pulsar SDK delete() is not available.');
+    }
+    return sdk.delete(objectApiName, id);
   }
 
   /**
@@ -10190,6 +10772,71 @@ function asBoolean(value) {
 }
 
 /**
+ * @param {string} objectApiName
+ * @param {import('c/sharedModels').QuerySpec} querySpec
+ * @returns {string}
+ */
+function buildSelectQuery(objectApiName, querySpec) {
+  const selectedFields = Array.isArray(querySpec.fields) && querySpec.fields.length > 0 ? querySpec.fields.join(', ') : '*';
+  const clauses = [];
+  const filterClause = buildFilterClause(querySpec.filters);
+  if (filterClause) {
+    clauses.push(filterClause);
+  }
+  if (querySpec.where) {
+    clauses.push(`(${querySpec.where})`);
+  }
+  const queryParts = [`SELECT ${selectedFields}`, `FROM ${objectApiName}`];
+  if (clauses.length > 0) {
+    queryParts.push(`WHERE ${clauses.join(' AND ')}`);
+  }
+  if (querySpec.orderBy) {
+    queryParts.push(`ORDER BY ${querySpec.orderBy}`);
+  }
+  if (querySpec.limit != null) {
+    queryParts.push(`LIMIT ${Number(querySpec.limit)}`);
+  }
+  return queryParts.join(' ');
+}
+
+/**
+ * @param {Record<string, string | number | boolean | null> | undefined} filters
+ * @returns {string}
+ */
+function buildFilterClause(filters) {
+  if (!filters) {
+    return '';
+  }
+  const entries = Object.entries(filters);
+  if (entries.length === 0) {
+    return '';
+  }
+  return entries.map(([fieldName, value]) => value === null ? `${fieldName} IS NULL` : `${fieldName} = ${toSqlLiteral(value)}`).join(' AND ');
+}
+
+/**
+ * @param {string | number | boolean} value
+ * @returns {string}
+ */
+function toSqlLiteral(value) {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? String(value) : 'NULL';
+  }
+  if (typeof value === 'boolean') {
+    return value ? "'true'" : "'false'";
+  }
+  return `'${String(value).replaceAll("'", "''")}'`;
+}
+
+/**
+ * @param {Record<string, unknown>} fields
+ * @returns {Record<string, unknown>}
+ */
+function withoutUndefinedFields(fields) {
+  return Object.fromEntries(Object.entries(fields).filter(([, value]) => value !== undefined));
+}
+
+/**
  * @param {Record<string, unknown>} fields
  * @returns {Record<string, unknown>}
  */
@@ -10225,12 +10872,11 @@ function applyAddressCompound(fields, prefix) {
   }
 }
 
-class PulsarRecordDetail extends LightningElement {
+class PulsarRetailExecution extends LightningElement {
   constructor(...args) {
     super(...args);
     this._pulsarSdk = void 0;
-    this.objectApiName = void 0;
-    this.recordId = void 0;
+    this.accountId = void 0;
     this.adapter = null;
   }
   get pulsarSdk() {
@@ -10238,26 +10884,22 @@ class PulsarRecordDetail extends LightningElement {
   }
   set pulsarSdk(value) {
     this._pulsarSdk = value;
-    // The Pulsar host stays thin: it only converts the injected SDK into the shared adapter contract.
     this.adapter = value ? new PulsarDataAdapter({
       sdk: value
     }) : null;
   }
   async refresh() {
-    const recordDetailApp = this.template.querySelector('c-record-detail-app');
-    if (recordDetailApp) {
-      return recordDetailApp.refresh();
+    const retailExecutionApp = this.template.querySelector('c-retail-execution-app');
+    if (retailExecutionApp) {
+      return retailExecutionApp.refresh();
     }
     return undefined;
   }
   /*LWC compiler v8.28.2*/
 }
-registerDecorators(PulsarRecordDetail, {
+registerDecorators(PulsarRetailExecution, {
   publicProps: {
-    objectApiName: {
-      config: 0
-    },
-    recordId: {
+    accountId: {
       config: 0
     },
     pulsarSdk: {
@@ -10267,9 +10909,9 @@ registerDecorators(PulsarRecordDetail, {
   publicMethods: ["refresh"],
   fields: ["_pulsarSdk", "adapter"]
 });
-const __lwc_component_class_internal = registerComponent(PulsarRecordDetail, {
+const __lwc_component_class_internal = registerComponent(PulsarRetailExecution, {
   tmpl: _tmpl,
-  sel: "lwc-pulsar-record-detail",
+  sel: "lwc-pulsar-retail-execution",
   apiVersion: 66
 });
 
@@ -12855,7 +13497,7 @@ const appRoot = document.getElementById('app');
 const cleanupHostSizing = installHostSizing(appRoot);
 let pulsar = null;
 let appElement = null;
-function refreshRecordDetail() {
+function refreshRetailExecution() {
   if (typeof appElement?.refresh === 'function') {
     void appElement.refresh();
   }
@@ -12867,22 +13509,26 @@ function refreshRecordDetail() {
     pulsar = new Pulsar();
     await pulsar.init();
     const launchContext = parseLaunchContext(window.location.search);
-    if (!launchContext.objectApiName || !launchContext.recordId) {
+    if (!launchContext.recordId) {
       renderMissingContext();
       notifyHostSize('*');
       return;
     }
-    appElement = createElement('c-pulsar-record-detail', {
+    if (launchContext.objectApiName && launchContext.objectApiName !== 'Account') {
+      renderUnsupportedContext(launchContext.objectApiName);
+      notifyHostSize('*');
+      return;
+    }
+    appElement = createElement('c-pulsar-retail-execution', {
       is: __lwc_component_class_internal
     });
     appElement.pulsarSdk = pulsar;
-    appElement.objectApiName = launchContext.objectApiName;
-    appElement.recordId = launchContext.recordId;
+    appElement.accountId = launchContext.recordId;
     appRoot.replaceChildren(appElement);
     notifyHostSize('*');
     if (typeof pulsar.registerHandler === 'function') {
-      pulsar.registerHandler('invalidateLayout', refreshRecordDetail);
-      pulsar.registerHandler('syncDataFinished', refreshRecordDetail);
+      pulsar.registerHandler('invalidateLayout', refreshRetailExecution);
+      pulsar.registerHandler('syncDataFinished', refreshRetailExecution);
     }
   } catch (error) {
     renderError(error instanceof Error ? error.message : 'Unexpected Pulsar bootstrap error.');
@@ -12895,7 +13541,7 @@ function renderBootstrapLoading() {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Initializing Pulsar bridge.</p>
         </div>
         <div class="state">Loading...</div>
@@ -12909,7 +13555,7 @@ function renderError(message) {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Bootstrap failed before the app could render.</p>
         </div>
         <div class="state error">${escapeHtml(message)}</div>
@@ -12923,10 +13569,24 @@ function renderMissingContext() {
       <section class="panel">
         <div class="panel-header">
           <p class="eyebrow">Pulsar App</p>
-          <h1 class="title">Pulsar Record Detail</h1>
+          <h1 class="title">Retail Execution</h1>
           <p class="subtitle">Launch context is incomplete.</p>
         </div>
-        <div class="state error">This app requires both objectType and id query parameters.</div>
+        <div class="state error">This app requires an account id in the launch context.</div>
+      </section>
+    </main>
+  `;
+}
+function renderUnsupportedContext(objectApiName) {
+  appRoot.innerHTML = `
+    <main class="shell">
+      <section class="panel">
+        <div class="panel-header">
+          <p class="eyebrow">Pulsar App</p>
+          <h1 class="title">Retail Execution</h1>
+          <p class="subtitle">Launch context is unsupported.</p>
+        </div>
+        <div class="state error">Retail Execution expects an Account context but received ${escapeHtml(objectApiName)}.</div>
       </section>
     </main>
   `;

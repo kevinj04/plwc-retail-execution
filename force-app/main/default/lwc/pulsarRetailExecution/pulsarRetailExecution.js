@@ -3,6 +3,7 @@ import { PulsarDataAdapter } from 'c/pulsarDataAdapter';
 
 export default class PulsarRetailExecution extends LightningElement {
   _pulsarSdk;
+  adapter = null;
 
   @api accountId;
 
@@ -15,8 +16,6 @@ export default class PulsarRetailExecution extends LightningElement {
     this._pulsarSdk = value;
     this.adapter = value ? new PulsarDataAdapter({ sdk: value }) : null;
   }
-
-  adapter = null;
 
   @api
   async refresh() {
