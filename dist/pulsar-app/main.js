@@ -9931,12 +9931,34 @@ function normalizeRetailExecutionVisit(record) {
     id: record.id || null,
     accountId: record.fields.Account__c ?? '',
     name: record.fields.Name ?? null,
-    checkInAt: record.fields.Check_In__c ?? null,
-    checkOutAt: record.fields.Check_Out__c ?? null,
+    checkInAt: normalizeUtcDateTimeString(record.fields.Check_In__c),
+    checkOutAt: normalizeUtcDateTimeString(record.fields.Check_Out__c),
     shelfCondition: record.fields.Shelf_Condition__c ?? null,
     promotionalDisplayCount: normalizeNullableNumber(record.fields.Promotional_Display_Count__c),
     spokeToManager: normalizeBoolean(record.fields.Spoke_To_Manager__c)
   };
+}
+
+/**
+ * Normalizes datetime values to canonical UTC ISO-8601 strings.
+ *
+ * Runtime adapters can return datetimes with or without explicit timezone
+ * markers. Treat naive values as UTC so both runtimes share one contract.
+ *
+ * @param {unknown} value
+ * @returns {string | null}
+ */
+function normalizeUtcDateTimeString(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+  const text = String(value).trim();
+  if (!text) {
+    return null;
+  }
+  const normalizedText = normalizeDateTimeText(text);
+  const dateValue = new Date(normalizedText);
+  return Number.isNaN(dateValue.getTime()) ? text : dateValue.toISOString();
 }
 
 /**
@@ -9966,6 +9988,18 @@ function normalizeBoolean(value) {
     return value !== 0;
   }
   return false;
+}
+function normalizeDateTimeText(value) {
+  if (hasExplicitTimeZone(value)) {
+    return value;
+  }
+  if (/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?$/.test(value)) {
+    return `${value.replace(' ', 'T')}Z`;
+  }
+  return value;
+}
+function hasExplicitTimeZone(value) {
+  return /(?:Z|[+-]\d{2}:\d{2}|[+-]\d{4})$/i.test(value);
 }
 
 /**
@@ -10180,11 +10214,12 @@ function createRetailExecutionDraft(accountId, checkedInAt = new Date().toISOStr
   if (!accountId) {
     throw new Error('An accountId is required before starting a retail visit draft.');
   }
+  const normalizedCheckedInAt = requireUtcDateTimeString(checkedInAt, 'Retail visit check-in');
   return {
     id: null,
     accountId,
     name: null,
-    checkInAt: checkedInAt,
+    checkInAt: normalizedCheckedInAt,
     checkOutAt: null,
     shelfCondition: null,
     promotionalDisplayCount: null,
@@ -10221,12 +10256,12 @@ function updateRetailExecutionDraft(draftVisit, fieldName, rawValue) {
     case 'Check_In__c':
       return {
         ...draftVisit,
-        checkInAt: normalizeNullableString(rawValue)
+        checkInAt: requireUtcDateTimeString(rawValue, 'Retail visit check-in')
       };
     case 'Check_Out__c':
       return {
         ...draftVisit,
-        checkOutAt: normalizeNullableString(rawValue)
+        checkOutAt: requireUtcDateTimeString(rawValue, 'Retail visit check-out')
       };
     case 'Name':
       return {
@@ -10252,10 +10287,12 @@ async function saveRetailExecutionDraft(adapter, draftVisit, checkedOutAt = new 
   if (!draftVisit.accountId) {
     throw new Error('A retail visit draft must include an accountId before save.');
   }
+  const normalizedCheckInAt = requireUtcDateTimeString(draftVisit.checkInAt, 'Retail visit check-in');
+  const normalizedCheckedOutAt = requireUtcDateTimeString(checkedOutAt, 'Retail visit check-out');
   const fields = {
     Account__c: draftVisit.accountId,
-    Check_In__c: draftVisit.checkInAt,
-    Check_Out__c: checkedOutAt,
+    Check_In__c: normalizedCheckInAt,
+    Check_Out__c: normalizedCheckedOutAt,
     Shelf_Condition__c: draftVisit.shelfCondition,
     Promotional_Display_Count__c: draftVisit.promotionalDisplayCount,
     Spoke_To_Manager__c: draftVisit.spokeToManager
@@ -10264,7 +10301,8 @@ async function saveRetailExecutionDraft(adapter, draftVisit, checkedOutAt = new 
   return {
     ...draftVisit,
     id,
-    checkOutAt: checkedOutAt
+    checkInAt: normalizedCheckInAt,
+    checkOutAt: normalizedCheckedOutAt
   };
 }
 
@@ -10289,6 +10327,19 @@ function normalizeNullableString(value) {
     return null;
   }
   return String(value);
+}
+
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {string}
+ */
+function requireUtcDateTimeString(value, label) {
+  const normalizedValue = normalizeUtcDateTimeString(value);
+  if (!normalizedValue) {
+    throw new Error(`${label} is required.`);
+  }
+  return normalizedValue;
 }
 
 /**

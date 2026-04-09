@@ -277,7 +277,7 @@ public with sharing class SharedDataAdapterController {
             return Datetime.valueOfGmt(normalized);
         }
 
-        return Datetime.valueOf(normalized);
+        return Datetime.valueOfGmt(normalized);
     }
 
     private static Date coerceDate(Object value) {

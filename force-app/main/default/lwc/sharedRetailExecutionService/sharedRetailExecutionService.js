@@ -1,5 +1,5 @@
 import { assertDataAdapter } from 'c/dataAdapter';
-import { normalizeRetailExecutionVisit } from 'c/sharedModels';
+import { normalizeRetailExecutionVisit, normalizeUtcDateTimeString } from 'c/sharedModels';
 
 /**
  * @typedef {import('c/dataAdapter').DataAdapter} DataAdapter
@@ -98,11 +98,13 @@ export function createRetailExecutionDraft(accountId, checkedInAt = new Date().t
     throw new Error('An accountId is required before starting a retail visit draft.');
   }
 
+  const normalizedCheckedInAt = requireUtcDateTimeString(checkedInAt, 'Retail visit check-in');
+
   return {
     id: null,
     accountId,
     name: null,
-    checkInAt: checkedInAt,
+    checkInAt: normalizedCheckedInAt,
     checkOutAt: null,
     shelfCondition: null,
     promotionalDisplayCount: null,
@@ -129,9 +131,9 @@ export function updateRetailExecutionDraft(draftVisit, fieldName, rawValue) {
     case 'Spoke_To_Manager__c':
       return { ...draftVisit, spokeToManager: Boolean(rawValue) };
     case 'Check_In__c':
-      return { ...draftVisit, checkInAt: normalizeNullableString(rawValue) };
+      return { ...draftVisit, checkInAt: requireUtcDateTimeString(rawValue, 'Retail visit check-in') };
     case 'Check_Out__c':
-      return { ...draftVisit, checkOutAt: normalizeNullableString(rawValue) };
+      return { ...draftVisit, checkOutAt: requireUtcDateTimeString(rawValue, 'Retail visit check-out') };
     case 'Name':
       return { ...draftVisit, name: normalizeNullableString(rawValue) };
     default:
@@ -156,10 +158,13 @@ export async function saveRetailExecutionDraft(adapter, draftVisit, checkedOutAt
     throw new Error('A retail visit draft must include an accountId before save.');
   }
 
+  const normalizedCheckInAt = requireUtcDateTimeString(draftVisit.checkInAt, 'Retail visit check-in');
+  const normalizedCheckedOutAt = requireUtcDateTimeString(checkedOutAt, 'Retail visit check-out');
+
   const fields = {
     Account__c: draftVisit.accountId,
-    Check_In__c: draftVisit.checkInAt,
-    Check_Out__c: checkedOutAt,
+    Check_In__c: normalizedCheckInAt,
+    Check_Out__c: normalizedCheckedOutAt,
     Shelf_Condition__c: draftVisit.shelfCondition,
     Promotional_Display_Count__c: draftVisit.promotionalDisplayCount,
     Spoke_To_Manager__c: draftVisit.spokeToManager
@@ -170,7 +175,8 @@ export async function saveRetailExecutionDraft(adapter, draftVisit, checkedOutAt
   return {
     ...draftVisit,
     id,
-    checkOutAt: checkedOutAt
+    checkInAt: normalizedCheckInAt,
+    checkOutAt: normalizedCheckedOutAt
   };
 }
 
@@ -197,6 +203,20 @@ function normalizeNullableString(value) {
   }
 
   return String(value);
+}
+
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {string}
+ */
+function requireUtcDateTimeString(value, label) {
+  const normalizedValue = normalizeUtcDateTimeString(value);
+  if (!normalizedValue) {
+    throw new Error(`${label} is required.`);
+  }
+
+  return normalizedValue;
 }
 
 /**

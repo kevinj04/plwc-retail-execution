@@ -242,12 +242,36 @@ export function normalizeRetailExecutionVisit(record) {
     id: record.id || null,
     accountId: record.fields.Account__c ?? '',
     name: record.fields.Name ?? null,
-    checkInAt: record.fields.Check_In__c ?? null,
-    checkOutAt: record.fields.Check_Out__c ?? null,
+    checkInAt: normalizeUtcDateTimeString(record.fields.Check_In__c),
+    checkOutAt: normalizeUtcDateTimeString(record.fields.Check_Out__c),
     shelfCondition: record.fields.Shelf_Condition__c ?? null,
     promotionalDisplayCount: normalizeNullableNumber(record.fields.Promotional_Display_Count__c),
     spokeToManager: normalizeBoolean(record.fields.Spoke_To_Manager__c)
   };
+}
+
+/**
+ * Normalizes datetime values to canonical UTC ISO-8601 strings.
+ *
+ * Runtime adapters can return datetimes with or without explicit timezone
+ * markers. Treat naive values as UTC so both runtimes share one contract.
+ *
+ * @param {unknown} value
+ * @returns {string | null}
+ */
+export function normalizeUtcDateTimeString(value) {
+  if (value === null || value === undefined || value === '') {
+    return null;
+  }
+
+  const text = String(value).trim();
+  if (!text) {
+    return null;
+  }
+
+  const normalizedText = normalizeDateTimeText(text);
+  const dateValue = new Date(normalizedText);
+  return Number.isNaN(dateValue.getTime()) ? text : dateValue.toISOString();
 }
 
 /**
@@ -281,4 +305,20 @@ export function normalizeBoolean(value) {
   }
 
   return false;
+}
+
+function normalizeDateTimeText(value) {
+  if (hasExplicitTimeZone(value)) {
+    return value;
+  }
+
+  if (/^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(?:\.\d+)?$/.test(value)) {
+    return `${value.replace(' ', 'T')}Z`;
+  }
+
+  return value;
+}
+
+function hasExplicitTimeZone(value) {
+  return /(?:Z|[+-]\d{2}:\d{2}|[+-]\d{4})$/i.test(value);
 }
