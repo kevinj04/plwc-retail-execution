@@ -43,7 +43,7 @@ Salesforce host:
 
 Pulsar host:
 
-- [force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js)
+- [force-app/main/default/lwc/retailExecutionPulsar/retailExecutionPulsar.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/retailExecutionPulsar/retailExecutionPulsar.js)
 - [force-app/main/default/lwc/pulsarDataAdapter/pulsarDataAdapter.js](/home/kevin/projects/retail-exec-2/force-app/main/default/lwc/pulsarDataAdapter/pulsarDataAdapter.js)
 - [pulsar-app/src/main.js](/home/kevin/projects/retail-exec-2/pulsar-app/src/main.js)
 

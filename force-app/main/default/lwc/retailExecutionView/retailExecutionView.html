@@ -1,5 +1,11 @@
 <template>
-  <lightning-card title="Retail Execution">
+  <section class="retail-execution-shell" aria-busy={isLoading}>
+    <template lwc:if={showHeader}>
+      <header class="panel-header">
+        <h2 class="panel-title">Retail Execution</h2>
+      </header>
+    </template>
+
     <template lwc:if={isLoading}>
       <div class="panel-state">Loading retail execution...</div>
     </template>
@@ -10,81 +16,102 @@
 
     <template lwc:else>
       <div class="retail-execution">
-        <p class="summary-line">
-          <span class="summary-label">Store:</span>
-          <span>{accountName}</span>
-        </p>
-
-        <template lwc:if={isCheckedIn}>
+        <section class="summary-block">
           <p class="summary-line">
-            <span class="summary-label">Checked In:</span>
-            <span>{checkedInDisplay}</span>
+            <span class="summary-label">Store:</span>
+            <span>{accountName}</span>
           </p>
 
-          <div class="entry-grid">
-            <lightning-combobox
-              class="field field_short"
-              name="Shelf_Condition__c"
-              label="Shelf Condition"
-              options={shelfOptions}
-              value={draftVisit.shelfCondition}
-              disabled={isSaving}
-              onchange={handleFieldChange}
-            ></lightning-combobox>
+          <template lwc:if={isCheckedIn}>
+            <p class="summary-line">
+              <span class="summary-label">Checked In:</span>
+              <span>{checkedInDisplay}</span>
+            </p>
+          </template>
 
-            <lightning-input
-              class="field field_short"
-              name="Promotional_Display_Count__c"
-              type="number"
-              label="Display Count"
-              value={draftVisit.promotionalDisplayCount}
-              disabled={isSaving}
-              onchange={handleFieldChange}
-            ></lightning-input>
-          </div>
+          <template lwc:else>
+            <p class="summary-line summary-line_compact">
+              <span class="summary-label">Last Visit:</span>
+              <span>{lastVisitDisplay}</span>
+              <template lwc:if={lastVisitName}>
+                <button class="visit-link" type="button" onclick={handleShowLastVisit}>{lastVisitName}</button>
+              </template>
+            </p>
+          </template>
+        </section>
 
-          <lightning-input
-            class="field-checkbox"
-            name="Spoke_To_Manager__c"
-            type="checkbox"
-            label="Spoke To Manager"
-            checked={draftVisit.spokeToManager}
-            disabled={isSaving}
-            onchange={handleFieldChange}
-          ></lightning-input>
+        <template lwc:if={isCheckedIn}>
+          <section class="form-panel">
+            <div class="entry-grid">
+            <label class="field field_short">
+              <span class="field-label">Shelf Condition</span>
+              <select
+                class="field-control"
+                name="Shelf_Condition__c"
+                disabled={isSaving}
+                onchange={handleFieldChange}
+              >
+                <template for:each={shelfOptionsForRender} for:item="option">
+                  <option key={option.value} value={option.value} selected={option.selected}>{option.label}</option>
+                </template>
+              </select>
+            </label>
 
-          <div class="actions">
-            <lightning-button
-              variant="neutral"
-              label="Cancel"
-              disabled={isSaving}
-              onclick={handleCancelDraft}
-            ></lightning-button>
-            <lightning-button
-              variant="brand"
-              label={saveButtonLabel}
-              disabled={isSaving}
-              onclick={handleSaveDraft}
-            ></lightning-button>
-          </div>
+            <label class="field field_short">
+              <span class="field-label">Display Count</span>
+              <input
+                class="field-control"
+                name="Promotional_Display_Count__c"
+                type="number"
+                value={draftVisit.promotionalDisplayCount}
+                disabled={isSaving}
+                onchange={handleFieldChange}
+              />
+            </label>
+            </div>
+
+            <label class="field-checkbox">
+              <input
+                name="Spoke_To_Manager__c"
+                type="checkbox"
+                checked={draftVisit.spokeToManager}
+                disabled={isSaving}
+                onchange={handleFieldChange}
+              />
+              <span>Spoke To Manager</span>
+            </label>
+
+            <div class="actions">
+              <button
+                class="button button_neutral"
+                type="button"
+                disabled={isSaving}
+                onclick={handleCancelDraft}
+              >
+                Cancel
+              </button>
+              <button
+                class="button button_brand"
+                type="button"
+                disabled={isSaving}
+                onclick={handleSaveDraft}
+              >
+                {saveButtonLabel}
+              </button>
+            </div>
+          </section>
         </template> 
 
         <template lwc:else>
-          <p class="summary-line">
-            <span class="summary-label">Last Visit:</span>
-            <span>{lastVisitDisplay}</span>
-            <template lwc:if={lastVisitName}>
-              <button class="visit-link" type="button" onclick={handleShowLastVisit}>{lastVisitName}</button>
-            </template>
-          </p>
-
           <div class="actions actions_single">
-            <lightning-button
-              label="Check In"
-              variant="brand"
+            <button
+              class="button button_brand"
+              type="button"
               disabled={isLoading}
               onclick={handleStartVisit}
-            ></lightning-button>
+            >
+              Check In
+            </button>
           </div>
 
           <template lwc:if={isViewingLastVisit}>
@@ -97,16 +124,14 @@
               </template>
 
               <div class="actions actions_single">
-                <lightning-button
-                  variant="neutral"
-                  label="Close"
-                  onclick={handleCloseLastVisit}
-                ></lightning-button>
+                <button class="button button_neutral" type="button" onclick={handleCloseLastVisit}>
+                  Close
+                </button>
               </div>
             </section>
           </template>
         </template>
       </div>
     </template>
-  </lightning-card>
+  </section>
 </template>

@@ -6,12 +6,16 @@
   <types>
     <members>dataAdapter</members>
     <members>pulsarDataAdapter</members>
-    <members>pulsarRecordDetail</members>
+    <members>retailExecutionApp</members>
+    <members>retailExecutionPage</members>
+    <members>retailExecutionPulsar</members>
+    <members>retailExecutionView</members>
     <members>recordDetailApp</members>
     <members>recordDetailView</members>
-    <members>salesforceRecordDetail</members>
+    <members>salesforceDataAdapter</members>
     <members>sharedModels</members>
     <members>sharedRecordService</members>
+    <members>sharedRetailExecutionService</members>
     <name>LightningComponentBundle</name>
   </types>
   <version>62.0</version>

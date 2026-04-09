@@ -9,6 +9,7 @@ import {
 export default class RetailExecutionApp extends LightningElement {
   _adapter;
   _accountId = '';
+  _showHeader = false;
   _isConnected = false;
   _refreshVersion = 0;
 
@@ -39,6 +40,15 @@ export default class RetailExecutionApp extends LightningElement {
   set accountId(value) {
     this._accountId = value || '';
     this.queueRefresh();
+  }
+
+  @api
+  get showHeader() {
+    return this._showHeader;
+  }
+
+  set showHeader(value) {
+    this._showHeader = value === true || value === 'true';
   }
 
   connectedCallback() {

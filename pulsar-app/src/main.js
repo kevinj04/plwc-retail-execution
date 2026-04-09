@@ -1,5 +1,5 @@
 import { createElement } from 'lwc';
-import PulsarRetailExecution from '../../force-app/main/default/lwc/pulsarRetailExecution/pulsarRetailExecution.js';
+import RetailExecutionPulsar from '../../force-app/main/default/lwc/retailExecutionPulsar/retailExecutionPulsar.js';
 import { Pulsar } from './vendor/pulsar.js';
 import { installHostSizing, notifyHostSize } from './hostSizing.js';
 import { parseLaunchContext } from './queryContext.js';
@@ -36,8 +36,8 @@ function refreshRetailExecution() {
       return;
     }
 
-    appElement = createElement('c-pulsar-retail-execution', {
-      is: PulsarRetailExecution
+    appElement = createElement('c-retail-execution-pulsar', {
+      is: RetailExecutionPulsar
     });
     appElement.pulsarSdk = pulsar;
     appElement.accountId = launchContext.recordId;

@@ -6,11 +6,6 @@ const process = {
   }
 };
 
-import _lightningCombobox from 'lightning/combobox';
-import _lightningInput from 'lightning/input';
-import _lightningButton from 'lightning/button';
-import _lightningCard from 'lightning/card';
-
 /**
  * Copyright (c) 2026 Salesforce, Inc.
  */
@@ -9152,50 +9147,50 @@ ElementDescriptors.shadowRoot.get;
 
 function stylesheet(token, useActualHostSelector, useNativeDirPseudoclass) {
   var shadowSelector = token ? ("[" + token + "]") : "";
-  return ".retail-execution" + shadowSelector + " {display: block;padding: 0.75rem 1rem 1rem;}.panel-state" + shadowSelector + " {padding: 1rem;}.panel-state_error" + shadowSelector + " {color: #8b1e1e;}.summary-line" + shadowSelector + " {margin: 0 0 0.85rem;color: #181818;line-height: 1.5;}.summary-label" + shadowSelector + ",.detail-label" + shadowSelector + " {font-weight: 700;}.entry-grid" + shadowSelector + " {display: grid;grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));gap: 0.75rem;align-items: start;}.field" + shadowSelector + " {display: block;}.field_short" + shadowSelector + " {max-width: 10rem;}.field-checkbox" + shadowSelector + " {margin-top: 0.5rem;}.actions" + shadowSelector + " {display: flex;flex-wrap: wrap;gap: 0.75rem;align-items: center;margin-top: 0.85rem;}.actions_single" + shadowSelector + " {margin-top: 0.65rem;}.visit-link" + shadowSelector + " {margin-left: 0.35rem;padding: 0;border: 0;background: transparent;color: #0176d3;cursor: pointer;font: inherit;text-decoration: underline;}.visit-link:hover" + shadowSelector + ",.visit-link:focus" + shadowSelector + " {color: #014486;}.visit-panel" + shadowSelector + " {margin-top: 0.85rem;padding: 0.85rem 1rem;border: 1px solid #d8dde6;border-radius: 0.25rem;background: #f8fafc;}.detail-row" + shadowSelector + " {margin: 0 0 0.45rem;line-height: 1.45;}.detail-row:last-of-type" + shadowSelector + " {margin-bottom: 0;}";
+  return ".retail-execution-shell" + shadowSelector + " {display: block;border: 1px solid #d8dde6;background:\n linear-gradient(180deg, #fbfdff 0%, #ffffff 4rem);box-shadow:\n 0 1px 2px rgba(0, 0, 0, 0.04),\n 0 6px 18px rgba(0, 0, 0, 0.03);}.panel-header" + shadowSelector + " {padding: 0.95rem 1rem 0.55rem;border-bottom: 1px solid #eef2f6;}.panel-title" + shadowSelector + " {margin: 0;color: #080707;font-size: 1rem;font-weight: 700;}.retail-execution" + shadowSelector + " {display: block;padding: 0.9rem 1rem 1rem;}.panel-state" + shadowSelector + " {padding: 1rem;}.panel-state_error" + shadowSelector + " {color: #8b1e1e;background: #fff7f7;}.summary-line" + shadowSelector + " {margin: 0 0 0.85rem;color: #181818;line-height: 1.5;}.summary-line_compact" + shadowSelector + " {margin-bottom: 0;}.summary-label" + shadowSelector + ",.detail-label" + shadowSelector + " {font-weight: 700;}.summary-block" + shadowSelector + " {padding: 0.8rem 0.9rem;border: 1px solid #e5edf3;border-radius: 0.5rem;background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);}.form-panel" + shadowSelector + " {margin-top: 0.95rem;padding: 0.95rem 0.9rem;border: 1px solid #dfe9f0;border-radius: 0.5rem;background: #fcfdfe;}.entry-grid" + shadowSelector + " {display: grid;grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));gap: 0.9rem;align-items: start;}.field" + shadowSelector + " {display: block;}.field-label" + shadowSelector + " {display: block;margin-bottom: 0.35rem;color: #3e3e3c;font-size: 0.875rem;font-weight: 600;}.field-control" + shadowSelector + " {width: 100%;min-height: 2.25rem;padding: 0.45rem 0.7rem;border: 1px solid #bcc6d0;border-radius: 0.375rem;background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);color: #181818;font: inherit;transition:\n border-color 120ms ease,\n box-shadow 120ms ease,\n background-color 120ms ease;}.field-control:focus" + shadowSelector + " {outline: 2px solid rgba(27, 150, 255, 0.22);outline-offset: 0;border-color: #0176d3;box-shadow: 0 0 0 1px #0176d3;}.field-control:disabled" + shadowSelector + " {background: #f3f3f3;color: #5c5c5c;}.field_short" + shadowSelector + " {max-width: 13rem;}.field-checkbox" + shadowSelector + " {display: inline-flex;gap: 0.5rem;align-items: center;margin-top: 0.7rem;color: #181818;font-size: 0.95rem;}.actions" + shadowSelector + " {display: flex;flex-wrap: wrap;gap: 0.75rem;align-items: center;margin-top: 0.85rem;}.actions_single" + shadowSelector + " {margin-top: 0.65rem;}.button" + shadowSelector + " {min-height: 2.25rem;padding: 0.5rem 1rem;border: 1px solid #c9c9c9;border-radius: 0.375rem;background: #fff;color: #0176d3;cursor: pointer;font: inherit;font-weight: 600;transition:\n background-color 120ms ease,\n border-color 120ms ease,\n box-shadow 120ms ease,\n color 120ms ease;}.button:hover:not(:disabled)" + shadowSelector + ",.button:focus-visible:not(:disabled)" + shadowSelector + " {border-color: #0176d3;box-shadow: 0 0 0 1px #0176d3 inset;}.button:disabled" + shadowSelector + " {opacity: 0.6;cursor: default;}.button_brand" + shadowSelector + " {border-color: #0176d3;background: #0176d3;color: #fff;}.button_brand:hover:not(:disabled)" + shadowSelector + ",.button_brand:focus-visible:not(:disabled)" + shadowSelector + " {border-color: #014486;background: #014486;box-shadow: none;}.button_neutral" + shadowSelector + " {background: #fff;}.visit-link" + shadowSelector + " {margin-left: 0.35rem;padding: 0;border: 0;background: transparent;color: #0176d3;cursor: pointer;font: inherit;text-decoration: underline;}.visit-link:hover" + shadowSelector + ",.visit-link:focus" + shadowSelector + " {color: #014486;}.visit-panel" + shadowSelector + " {margin-top: 0.95rem;padding: 0.95rem 1rem;border: 1px solid #dfe9f0;border-radius: 0.5rem;background: linear-gradient(180deg, #fbfdff 0%, #f6fafc 100%);}.detail-row" + shadowSelector + " {margin: 0 0 0.45rem;line-height: 1.45;}.detail-row:last-of-type" + shadowSelector + " {margin-bottom: 0;}@media (max-width: 480px) {.retail-execution" + shadowSelector + ", .panel-header" + shadowSelector + ", .panel-state" + shadowSelector + " {padding-left: 0.85rem;padding-right: 0.85rem;}.entry-grid" + shadowSelector + " {grid-template-columns: 1fr;}.field_short" + shadowSelector + " {max-width: none;}.actions" + shadowSelector + " {flex-direction: column;align-items: stretch;}.button" + shadowSelector + " {width: 100%;}}";
   /*LWC compiler v8.28.2*/
 }
 var _implicitStylesheets = [stylesheet];
 
 const stc0 = {
-  props: {
-    "title": "Retail Execution"
-  },
-  key: 0
+  "retail-execution-shell": true
 };
 const stc1 = {
   classMap: {
-    "panel-state": true
+    "panel-header": true
   },
   key: 2
 };
 const stc2 = {
   classMap: {
-    "panel-state": true,
-    "panel-state_error": true
+    "panel-title": true
   },
   key: 3
 };
 const stc3 = {
   classMap: {
-    "retail-execution": true
-  },
-  key: 4
-};
-const stc4 = {
-  classMap: {
-    "summary-line": true
+    "panel-state": true
   },
   key: 5
 };
-const stc5 = {
+const stc4 = {
   classMap: {
-    "summary-label": true
+    "panel-state": true,
+    "panel-state_error": true
   },
   key: 6
 };
-const stc6 = {
+const stc5 = {
+  classMap: {
+    "retail-execution": true
+  },
   key: 7
+};
+const stc6 = {
+  classMap: {
+    "summary-block": true
+  },
+  key: 8
 };
 const stc7 = {
   classMap: {
@@ -9214,171 +9209,241 @@ const stc9 = {
 };
 const stc10 = {
   classMap: {
-    "entry-grid": true
+    "summary-line": true
   },
-  key: 12
+  key: 13
 };
 const stc11 = {
-  "field": true,
-  "field_short": true
+  classMap: {
+    "summary-label": true
+  },
+  key: 14
 };
 const stc12 = {
-  "field-checkbox": true
+  key: 15
 };
 const stc13 = {
   classMap: {
-    "actions": true
+    "summary-line": true,
+    "summary-line_compact": true
   },
   key: 16
 };
 const stc14 = {
   classMap: {
-    "summary-line": true
-  },
-  key: 19
-};
-const stc15 = {
-  classMap: {
     "summary-label": true
   },
-  key: 20
+  key: 17
+};
+const stc15 = {
+  key: 18
 };
 const stc16 = {
-  key: 21
-};
-const stc17 = {
   "visit-link": true
 };
-const stc18 = {
+const stc17 = {
   "type": "button"
+};
+const stc18 = {
+  classMap: {
+    "form-panel": true
+  },
+  key: 22
 };
 const stc19 = {
   classMap: {
-    "actions": true,
-    "actions_single": true
+    "entry-grid": true
   },
-  key: 24
+  key: 23
 };
 const stc20 = {
   classMap: {
-    "visit-panel": true
+    "field": true,
+    "field_short": true
   },
-  key: 27
+  key: 24
 };
 const stc21 = {
-  "detail-row": true
+  classMap: {
+    "field-label": true
+  },
+  key: 25
 };
 const stc22 = {
+  "field-control": true
+};
+const stc23 = {
   classMap: {
-    "detail-label": true
+    "field": true,
+    "field_short": true
+  },
+  key: 28
+};
+const stc24 = {
+  classMap: {
+    "field-label": true
   },
   key: 29
 };
-const stc23 = {
-  key: 30
+const stc25 = {
+  classMap: {
+    "field-checkbox": true
+  },
+  key: 31
 };
-const stc24 = {
+const stc26 = {
+  key: 33
+};
+const stc27 = {
+  classMap: {
+    "actions": true
+  },
+  key: 34
+};
+const stc28 = {
+  "button": true,
+  "button_neutral": true
+};
+const stc29 = {
+  "button": true,
+  "button_brand": true
+};
+const stc30 = {
   classMap: {
     "actions": true,
     "actions_single": true
   },
-  key: 31
+  key: 37
 };
-const stc25 = {
-  "variant": "neutral",
-  "label": "Close"
+const stc31 = {
+  classMap: {
+    "visit-panel": true
+  },
+  key: 40
+};
+const stc32 = {
+  "detail-row": true
+};
+const stc33 = {
+  classMap: {
+    "detail-label": true
+  },
+  key: 42
+};
+const stc34 = {
+  key: 43
+};
+const stc35 = {
+  classMap: {
+    "actions": true,
+    "actions_single": true
+  },
+  key: 44
 };
 function tmpl$2($api, $cmp, $slotset, $ctx) {
-  const {t: api_text, h: api_element, fr: api_fragment, d: api_dynamic_text, b: api_bind, c: api_custom_element, k: api_key, i: api_iterator, f: api_flatten} = $api;
+  const {t: api_text, h: api_element, fr: api_fragment, d: api_dynamic_text, b: api_bind, k: api_key, i: api_iterator, f: api_flatten} = $api;
   const {_m0, _m1, _m2, _m3, _m4, _m5, _m6, _m7} = $ctx;
-  return [api_custom_element("lightning-card", _lightningCard, stc0, [$cmp.isLoading ? api_fragment(1, [api_element("div", stc1, [api_text("Loading retail execution...")])], 0) : $cmp.hasError ? api_fragment(1, [api_element("div", stc2, [api_text(api_dynamic_text($cmp.errorMessage))])], 0) : api_fragment(1, [api_element("div", stc3, [api_element("p", stc4, [api_element("span", stc5, [api_text("Store:")]), api_element("span", stc6, [api_text(api_dynamic_text($cmp.accountName))])]), $cmp.isCheckedIn ? api_fragment(8, [api_element("p", stc7, [api_element("span", stc8, [api_text("Checked In:")]), api_element("span", stc9, [api_text(api_dynamic_text($cmp.checkedInDisplay))])]), api_element("div", stc10, [api_custom_element("lightning-combobox", _lightningCombobox, {
-    classMap: stc11,
-    props: {
-      "name": "Shelf_Condition__c",
-      "label": "Shelf Condition",
-      "options": $cmp.shelfOptions,
-      "value": $cmp.draftVisit.shelfCondition,
-      "disabled": $cmp.isSaving
+  return [api_element("section", {
+    classMap: stc0,
+    attrs: {
+      "aria-busy": $cmp.isLoading
     },
-    key: 13,
+    key: 0
+  }, [$cmp.showHeader ? api_fragment(1, [api_element("header", stc1, [api_element("h2", stc2, [api_text("Retail Execution")])])], 0) : null, $cmp.isLoading ? api_fragment(4, [api_element("div", stc3, [api_text("Loading retail execution...")])], 0) : $cmp.hasError ? api_fragment(4, [api_element("div", stc4, [api_text(api_dynamic_text($cmp.errorMessage))])], 0) : api_fragment(4, [api_element("div", stc5, [api_element("section", stc6, [api_element("p", stc7, [api_element("span", stc8, [api_text("Store:")]), api_element("span", stc9, [api_text(api_dynamic_text($cmp.accountName))])]), $cmp.isCheckedIn ? api_fragment(12, [api_element("p", stc10, [api_element("span", stc11, [api_text("Checked In:")]), api_element("span", stc12, [api_text(api_dynamic_text($cmp.checkedInDisplay))])])], 0) : api_fragment(12, [api_element("p", stc13, [api_element("span", stc14, [api_text("Last Visit:")]), api_element("span", stc15, [api_text(api_dynamic_text($cmp.lastVisitDisplay))]), $cmp.lastVisitName ? api_fragment(19, [api_element("button", {
+    classMap: stc16,
+    attrs: stc17,
+    key: 20,
     on: _m0 || ($ctx._m0 = {
-      "change": api_bind($cmp.handleFieldChange)
+      "click": api_bind($cmp.handleShowLastVisit)
     })
-  }), api_custom_element("lightning-input", _lightningInput, {
-    classMap: stc11,
-    props: {
-      "name": "Promotional_Display_Count__c",
-      "type": "number",
-      "label": "Display Count",
-      "value": $cmp.draftVisit.promotionalDisplayCount,
-      "disabled": $cmp.isSaving
+  }, [api_text(api_dynamic_text($cmp.lastVisitName))])], 0) : null])], 0)]), $cmp.isCheckedIn ? api_fragment(21, [api_element("section", stc18, [api_element("div", stc19, [api_element("label", stc20, [api_element("span", stc21, [api_text("Shelf Condition")]), api_element("select", {
+    classMap: stc22,
+    attrs: {
+      "name": "Shelf_Condition__c",
+      "disabled": $cmp.isSaving ? "" : null
     },
-    key: 14,
+    key: 26,
     on: _m1 || ($ctx._m1 = {
       "change": api_bind($cmp.handleFieldChange)
     })
-  })]), api_custom_element("lightning-input", _lightningInput, {
-    classMap: stc12,
-    props: {
-      "name": "Spoke_To_Manager__c",
-      "type": "checkbox",
-      "label": "Spoke To Manager",
-      "checked": $cmp.draftVisit.spokeToManager,
-      "disabled": $cmp.isSaving
+  }, api_iterator($cmp.shelfOptionsForRender, function (option) {
+    return api_element("option", {
+      attrs: {
+        "value": option.value,
+        "selected": option.selected ? "" : null
+      },
+      key: api_key(27, option.value)
+    }, [api_text(api_dynamic_text(option.label))]);
+  }))]), api_element("label", stc23, [api_element("span", stc24, [api_text("Display Count")]), api_element("input", {
+    classMap: stc22,
+    attrs: {
+      "name": "Promotional_Display_Count__c",
+      "type": "number",
+      "disabled": $cmp.isSaving ? "" : null
     },
-    key: 15,
+    props: {
+      "value": $cmp.draftVisit.promotionalDisplayCount
+    },
+    key: 30,
     on: _m2 || ($ctx._m2 = {
       "change": api_bind($cmp.handleFieldChange)
     })
-  }), api_element("div", stc13, [api_custom_element("lightning-button", _lightningButton, {
-    props: {
-      "variant": "neutral",
-      "label": "Cancel",
-      "disabled": $cmp.isSaving
+  })])]), api_element("label", stc25, [api_element("input", {
+    attrs: {
+      "name": "Spoke_To_Manager__c",
+      "type": "checkbox",
+      "disabled": $cmp.isSaving ? "" : null
     },
-    key: 17,
+    props: {
+      "checked": $cmp.draftVisit.spokeToManager
+    },
+    key: 32,
     on: _m3 || ($ctx._m3 = {
+      "change": api_bind($cmp.handleFieldChange)
+    })
+  }), api_element("span", stc26, [api_text("Spoke To Manager")])]), api_element("div", stc27, [api_element("button", {
+    classMap: stc28,
+    attrs: {
+      "type": "button",
+      "disabled": $cmp.isSaving ? "" : null
+    },
+    key: 35,
+    on: _m4 || ($ctx._m4 = {
       "click": api_bind($cmp.handleCancelDraft)
     })
-  }), api_custom_element("lightning-button", _lightningButton, {
-    props: {
-      "variant": "brand",
-      "label": $cmp.saveButtonLabel,
-      "disabled": $cmp.isSaving
+  }, [api_text("Cancel")]), api_element("button", {
+    classMap: stc29,
+    attrs: {
+      "type": "button",
+      "disabled": $cmp.isSaving ? "" : null
     },
-    key: 18,
-    on: _m4 || ($ctx._m4 = {
+    key: 36,
+    on: _m5 || ($ctx._m5 = {
       "click": api_bind($cmp.handleSaveDraft)
     })
-  })])], 0) : api_fragment(8, [api_element("p", stc14, [api_element("span", stc15, [api_text("Last Visit:")]), api_element("span", stc16, [api_text(api_dynamic_text($cmp.lastVisitDisplay))]), $cmp.lastVisitName ? api_fragment(22, [api_element("button", {
-    classMap: stc17,
-    attrs: stc18,
-    key: 23,
-    on: _m5 || ($ctx._m5 = {
-      "click": api_bind($cmp.handleShowLastVisit)
-    })
-  }, [api_text(api_dynamic_text($cmp.lastVisitName))])], 0) : null]), api_element("div", stc19, [api_custom_element("lightning-button", _lightningButton, {
-    props: {
-      "label": "Check In",
-      "variant": "brand",
-      "disabled": $cmp.isLoading
+  }, [api_text(api_dynamic_text($cmp.saveButtonLabel))])])])], 0) : api_fragment(21, [api_element("div", stc30, [api_element("button", {
+    classMap: stc29,
+    attrs: {
+      "type": "button",
+      "disabled": $cmp.isLoading ? "" : null
     },
-    key: 25,
+    key: 38,
     on: _m6 || ($ctx._m6 = {
       "click": api_bind($cmp.handleStartVisit)
     })
-  })]), $cmp.isViewingLastVisit ? api_fragment(26, [api_element("section", stc20, api_flatten([api_iterator($cmp.viewingVisitRows, function (row) {
+  }, [api_text("Check In")])]), $cmp.isViewingLastVisit ? api_fragment(39, [api_element("section", stc31, api_flatten([api_iterator($cmp.viewingVisitRows, function (row) {
     return api_element("p", {
-      classMap: stc21,
-      key: api_key(28, row.key)
-    }, [api_element("span", stc22, [api_text(api_dynamic_text(row.label) + ":")]), api_element("span", stc23, [api_text(api_dynamic_text(row.value))])]);
-  }), api_element("div", stc24, [api_custom_element("lightning-button", _lightningButton, {
-    props: stc25,
-    key: 32,
+      classMap: stc32,
+      key: api_key(41, row.key)
+    }, [api_element("span", stc33, [api_text(api_dynamic_text(row.label) + ":")]), api_element("span", stc34, [api_text(api_dynamic_text(row.value))])]);
+  }), api_element("div", stc35, [api_element("button", {
+    classMap: stc28,
+    attrs: stc17,
+    key: 45,
     on: _m7 || ($ctx._m7 = {
       "click": api_bind($cmp.handleCloseLastVisit)
     })
-  })])]))], 0) : null], 0)])], 0)])];
+  }, [api_text("Close")])])]))], 0) : null], 0)])], 0)])];
   /*LWC compiler v8.28.2*/
 }
 var _tmpl$2 = registerTemplate(tmpl$2);
@@ -9398,6 +9463,7 @@ class RetailExecutionView extends LightningElement {
     this.draftVisit = null;
     this.viewingVisit = null;
     this.shelfConditionField = null;
+    this.showHeader = false;
     this.isLoading = false;
     this.isSaving = false;
     this.errorMessage = '';
@@ -9413,6 +9479,17 @@ class RetailExecutionView extends LightningElement {
   }
   get shelfOptions() {
     return this.shelfConditionField?.picklistValues ?? [];
+  }
+  get shelfOptionsForRender() {
+    const selectedValue = this.draftVisit?.shelfCondition ?? '';
+    return [{
+      label: 'Select one',
+      value: '',
+      selected: selectedValue === ''
+    }, ...this.shelfOptions.map(option => ({
+      ...option,
+      selected: option.value === selectedValue
+    }))];
   }
   get lastVisitName() {
     return this.lastVisit?.name ?? '';
@@ -9481,31 +9558,29 @@ class RetailExecutionView extends LightningElement {
     }];
   }
   handleStartVisit() {
-    this.dispatchEvent(new CustomEvent('startvisit'));
+    this.dispatchEvent(createComponentEvent('startvisit'));
   }
   handleCancelDraft() {
-    this.dispatchEvent(new CustomEvent('canceldraft'));
+    this.dispatchEvent(createComponentEvent('canceldraft'));
   }
   handleSaveDraft() {
-    this.dispatchEvent(new CustomEvent('savedraft'));
+    this.dispatchEvent(createComponentEvent('savedraft'));
   }
   handleShowLastVisit() {
-    this.dispatchEvent(new CustomEvent('showlastvisit'));
+    this.dispatchEvent(createComponentEvent('showlastvisit'));
   }
   handleCloseLastVisit() {
-    this.dispatchEvent(new CustomEvent('closelastvisit'));
+    this.dispatchEvent(createComponentEvent('closelastvisit'));
   }
   handleFieldChange(event) {
     const fieldName = event.target.name;
     let value;
     if (event.target.type === 'checkbox') {
       value = event.target.checked;
-    } else if (event.detail && event.detail.value !== undefined) {
-      value = event.detail.value;
     } else {
       value = event.target.value;
     }
-    this.dispatchEvent(new CustomEvent('draftchange', {
+    this.dispatchEvent(createComponentEvent('draftchange', {
       detail: {
         fieldName,
         value
@@ -9531,6 +9606,9 @@ registerDecorators(RetailExecutionView, {
     shelfConditionField: {
       config: 0
     },
+    showHeader: {
+      config: 0
+    },
     isLoading: {
       config: 0
     },
@@ -9547,6 +9625,13 @@ const __lwc_component_class_internal$2 = registerComponent(RetailExecutionView, 
   sel: "lwc-retail-execution-view",
   apiVersion: 66
 });
+function createComponentEvent(name, init = {}) {
+  return new CustomEvent(name, {
+    bubbles: true,
+    composed: true,
+    ...init
+  });
+}
 function formatDate(value, options) {
   const dateValue = parseDate(value);
   if (!dateValue) {
@@ -9591,6 +9676,7 @@ function tmpl$1($api, $cmp, $slotset, $ctx) {
       "draftVisit": $cmp.draftVisit,
       "viewingVisit": $cmp.viewingVisit,
       "shelfConditionField": $cmp.shelfConditionField,
+      "showHeader": $cmp.showHeader,
       "isLoading": $cmp.isLoading,
       "isSaving": $cmp.isSaving,
       "errorMessage": $cmp.errorMessage
@@ -10222,6 +10308,7 @@ class RetailExecutionApp extends LightningElement {
     super(...args);
     this._adapter = void 0;
     this._accountId = '';
+    this._showHeader = false;
     this._isConnected = false;
     this._refreshVersion = 0;
     this.accountName = '';
@@ -10247,6 +10334,12 @@ class RetailExecutionApp extends LightningElement {
     this._accountId = value || '';
     this.queueRefresh();
   }
+  get showHeader() {
+    return this._showHeader;
+  }
+  set showHeader(value) {
+    this._showHeader = value === true || value === 'true';
+  }
   connectedCallback() {
     this._isConnected = true;
     this.queueRefresh();
@@ -10259,12 +10352,12 @@ class RetailExecutionApp extends LightningElement {
     const refreshVersion = ++this._refreshVersion;
     if (!this._adapter) {
       this.resetState();
-      this.errorMessage = 'A data adapter is required before loading retail execution.';
+      this.errorMessage = '';
       return;
     }
     if (!this._accountId) {
       this.resetState();
-      this.errorMessage = 'Set account-id before loading retail execution.';
+      this.errorMessage = '';
       return;
     }
     this.isLoading = true;
@@ -10287,7 +10380,7 @@ class RetailExecutionApp extends LightningElement {
         return;
       }
       this.resetState();
-      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution error.';
+      this.errorMessage = normalizeErrorMessage(error, 'Unexpected retail execution error.');
     } finally {
       if (!this.shouldApply(refreshVersion)) {
         return;
@@ -10302,7 +10395,11 @@ class RetailExecutionApp extends LightningElement {
     return Boolean(this.viewingVisit);
   }
   handleStartVisit() {
-    if (!this._accountId || this.isLoading || this.isSaving) {
+    if (!this._accountId) {
+      this.errorMessage = 'Retail Execution requires an Account record context.';
+      return;
+    }
+    if (this.isLoading || this.isSaving) {
       return;
     }
     this.draftVisit = createRetailExecutionDraft(this._accountId);
@@ -10345,7 +10442,7 @@ class RetailExecutionApp extends LightningElement {
         }
       }));
     } catch (error) {
-      this.errorMessage = error instanceof Error ? error.message : 'Unexpected retail execution save error.';
+      this.errorMessage = normalizeErrorMessage(error, 'Unexpected retail execution save error.');
     } finally {
       this.isSaving = false;
     }
@@ -10388,6 +10485,9 @@ registerDecorators(RetailExecutionApp, {
     },
     accountId: {
       config: 3
+    },
+    showHeader: {
+      config: 3
     }
   },
   publicMethods: ["refresh"],
@@ -10401,20 +10501,36 @@ registerDecorators(RetailExecutionApp, {
     isLoading: 1,
     isSaving: 1
   },
-  fields: ["_adapter", "_accountId", "_isConnected", "_refreshVersion"]
+  fields: ["_adapter", "_accountId", "_showHeader", "_isConnected", "_refreshVersion"]
 });
 const __lwc_component_class_internal$1 = registerComponent(RetailExecutionApp, {
   tmpl: _tmpl$1,
   sel: "lwc-retail-execution-app",
   apiVersion: 66
 });
+function normalizeErrorMessage(error, fallbackMessage) {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+  if (Array.isArray(error?.body)) {
+    return error.body.map(entry => entry?.message).filter(Boolean).join(', ') || fallbackMessage;
+  }
+  if (typeof error?.body?.message === 'string' && error.body.message) {
+    return error.body.message;
+  }
+  if (typeof error?.message === 'string' && error.message) {
+    return error.message;
+  }
+  return fallbackMessage;
+}
 
 function tmpl($api, $cmp, $slotset, $ctx) {
   const {c: api_custom_element} = $api;
   return [api_custom_element("c-retail-execution-app", __lwc_component_class_internal$1, {
     props: {
       "adapter": $cmp.adapter,
-      "accountId": $cmp.accountId
+      "accountId": $cmp.accountId,
+      "showHeader": "true"
     },
     key: 0
   })];
@@ -10422,8 +10538,8 @@ function tmpl($api, $cmp, $slotset, $ctx) {
 }
 var _tmpl = registerTemplate(tmpl);
 tmpl.stylesheets = [];
-tmpl.stylesheetToken = "lwc-7rha07kvjmt";
-tmpl.legacyStylesheetToken = "lwc-pulsarRetailExecution_pulsarRetailExecution";
+tmpl.stylesheetToken = "lwc-6gh9f7qt3b3";
+tmpl.legacyStylesheetToken = "lwc-retailExecutionPulsar_retailExecutionPulsar";
 freezeTemplate(tmpl);
 
 const MASTER_RECORD_TYPE_ID = '012000000000000AAA';
@@ -10872,12 +10988,12 @@ function applyAddressCompound(fields, prefix) {
   }
 }
 
-class PulsarRetailExecution extends LightningElement {
+class RetailExecutionPulsar extends LightningElement {
   constructor(...args) {
     super(...args);
     this._pulsarSdk = void 0;
-    this.accountId = void 0;
     this.adapter = null;
+    this.accountId = void 0;
   }
   get pulsarSdk() {
     return this._pulsarSdk;
@@ -10897,7 +11013,7 @@ class PulsarRetailExecution extends LightningElement {
   }
   /*LWC compiler v8.28.2*/
 }
-registerDecorators(PulsarRetailExecution, {
+registerDecorators(RetailExecutionPulsar, {
   publicProps: {
     accountId: {
       config: 0
@@ -10909,9 +11025,9 @@ registerDecorators(PulsarRetailExecution, {
   publicMethods: ["refresh"],
   fields: ["_pulsarSdk", "adapter"]
 });
-const __lwc_component_class_internal = registerComponent(PulsarRetailExecution, {
+const __lwc_component_class_internal = registerComponent(RetailExecutionPulsar, {
   tmpl: _tmpl,
-  sel: "lwc-pulsar-retail-execution",
+  sel: "lwc-retail-execution-pulsar",
   apiVersion: 66
 });
 
@@ -13519,7 +13635,7 @@ function refreshRetailExecution() {
       notifyHostSize('*');
       return;
     }
-    appElement = createElement('c-pulsar-retail-execution', {
+    appElement = createElement('c-retail-execution-pulsar', {
       is: __lwc_component_class_internal
     });
     appElement.pulsarSdk = pulsar;

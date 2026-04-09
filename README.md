@@ -53,7 +53,7 @@ retailExecutionPage                 pulsar-app/src/main.js
 - `force-app/main/default/lwc/salesforceDataAdapter`: Salesforce adapter backed by Apex
 - `force-app/main/default/classes/SharedDataAdapterController.cls`: generic Salesforce data/schema bridge for the adapter
 - `force-app/main/default/lwc/retailExecutionPage`: Salesforce host component exposed in App Builder
-- `force-app/main/default/lwc/pulsarRetailExecution`: Pulsar LWC host wrapper
+- `force-app/main/default/lwc/retailExecutionPulsar`: Pulsar LWC host wrapper
 - `force-app/main/default/lwc/pulsarDataAdapter`: Pulsar SDK-backed adapter
 - `pulsar-app/`: standalone Pulsar app entrypoint and bundling assets
 - `docs/pulsar-lwc-rfc.md`: architectural definition
@@ -144,7 +144,7 @@ Run the lightweight repo syntax check:
 npm run check
 ```
 
-The standalone Pulsar entrypoint is [pulsar-app/src/main.js](/home/kevin/projects/retail-exec-2/pulsar-app/src/main.js). It initializes the Pulsar bridge, reads launch context from query parameters, and mounts `c-pulsar-record-detail`.
+The standalone Pulsar entrypoint is [pulsar-app/src/main.js](/home/kevin/projects/retail-exec-2/pulsar-app/src/main.js). It initializes the Pulsar bridge, reads launch context from query parameters, and mounts `c-retail-execution-pulsar`.
 
 `npm run check` is intentionally lightweight. It validates JavaScript syntax across the shared LWC modules, the Pulsar app entrypoint, and helper scripts. It is not a substitute for Salesforce deployment validation.
 

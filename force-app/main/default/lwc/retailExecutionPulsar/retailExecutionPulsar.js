@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import { PulsarDataAdapter } from 'c/pulsarDataAdapter';
 
-export default class PulsarRetailExecution extends LightningElement {
+export default class RetailExecutionPulsar extends LightningElement {
   _pulsarSdk;
   adapter = null;
 

@@ -1,6 +1,28 @@
+.retail-execution-shell {
+  display: block;
+  border: 1px solid #d8dde6;
+  background:
+    linear-gradient(180deg, #fbfdff 0%, #ffffff 4rem);
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 6px 18px rgba(0, 0, 0, 0.03);
+}
+
+.panel-header {
+  padding: 0.95rem 1rem 0.55rem;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.panel-title {
+  margin: 0;
+  color: #080707;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .retail-execution {
   display: block;
-  padding: 0.75rem 1rem 1rem;
+  padding: 0.9rem 1rem 1rem;
 }
 
 .panel-state {
@@ -9,6 +31,7 @@
 
 .panel-state_error {
   color: #8b1e1e;
+  background: #fff7f7;
 }
 
 .summary-line {
@@ -17,15 +40,34 @@
   line-height: 1.5;
 }
 
+.summary-line_compact {
+  margin-bottom: 0;
+}
+
 .summary-label,
 .detail-label {
   font-weight: 700;
 }
 
+.summary-block {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #e5edf3;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbfd 100%);
+}
+
+.form-panel {
+  margin-top: 0.95rem;
+  padding: 0.95rem 0.9rem;
+  border: 1px solid #dfe9f0;
+  border-radius: 0.5rem;
+  background: #fcfdfe;
+}
+
 .entry-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(10rem, max-content));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 13rem));
+  gap: 0.9rem;
   align-items: start;
 }
 
@@ -33,12 +75,52 @@
   display: block;
 }
 
+.field-label {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #3e3e3c;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.field-control {
+  width: 100%;
+  min-height: 2.25rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #bcc6d0;
+  border-radius: 0.375rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbfb 100%);
+  color: #181818;
+  font: inherit;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.field-control:focus {
+  outline: 2px solid rgba(27, 150, 255, 0.22);
+  outline-offset: 0;
+  border-color: #0176d3;
+  box-shadow: 0 0 0 1px #0176d3;
+}
+
+.field-control:disabled {
+  background: #f3f3f3;
+  color: #5c5c5c;
+}
+
 .field_short {
-  max-width: 10rem;
+  max-width: 13rem;
 }
 
 .field-checkbox {
-  margin-top: 0.5rem;
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.7rem;
+  color: #181818;
+  font-size: 0.95rem;
 }
 
 .actions {
@@ -51,6 +133,51 @@
 
 .actions_single {
   margin-top: 0.65rem;
+}
+
+.button {
+  min-height: 2.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 0.375rem;
+  background: #fff;
+  color: #0176d3;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 600;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    color 120ms ease;
+}
+
+.button:hover:not(:disabled),
+.button:focus-visible:not(:disabled) {
+  border-color: #0176d3;
+  box-shadow: 0 0 0 1px #0176d3 inset;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.button_brand {
+  border-color: #0176d3;
+  background: #0176d3;
+  color: #fff;
+}
+
+.button_brand:hover:not(:disabled),
+.button_brand:focus-visible:not(:disabled) {
+  border-color: #014486;
+  background: #014486;
+  box-shadow: none;
+}
+
+.button_neutral {
+  background: #fff;
 }
 
 .visit-link {
@@ -70,11 +197,11 @@
 }
 
 .visit-panel {
-  margin-top: 0.85rem;
-  padding: 0.85rem 1rem;
-  border: 1px solid #d8dde6;
-  border-radius: 0.25rem;
-  background: #f8fafc;
+  margin-top: 0.95rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid #dfe9f0;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #fbfdff 0%, #f6fafc 100%);
 }
 
 .detail-row {
@@ -84,4 +211,30 @@
 
 .detail-row:last-of-type {
   margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .retail-execution,
+  .panel-header,
+  .panel-state {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .entry-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field_short {
+    max-width: none;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .button {
+    width: 100%;
+  }
 }

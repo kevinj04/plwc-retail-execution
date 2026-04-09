@@ -6,6 +6,7 @@ export default class RetailExecutionView extends LightningElement {
   @api draftVisit = null;
   @api viewingVisit = null;
   @api shelfConditionField = null;
+  @api showHeader = false;
   @api isLoading = false;
   @api isSaving = false;
   @api errorMessage = '';
@@ -24,6 +25,22 @@ export default class RetailExecutionView extends LightningElement {
 
   get shelfOptions() {
     return this.shelfConditionField?.picklistValues ?? [];
+  }
+
+  get shelfOptionsForRender() {
+    const selectedValue = this.draftVisit?.shelfCondition ?? '';
+
+    return [
+      {
+        label: 'Select one',
+        value: '',
+        selected: selectedValue === ''
+      },
+      ...this.shelfOptions.map((option) => ({
+        ...option,
+        selected: option.value === selectedValue
+      }))
+    ];
   }
 
   get lastVisitName() {
@@ -111,8 +128,6 @@ export default class RetailExecutionView extends LightningElement {
 
     if (event.target.type === 'checkbox') {
       value = event.target.checked;
-    } else if (event.detail && event.detail.value !== undefined) {
-      value = event.detail.value;
     } else {
       value = event.target.value;
     }
